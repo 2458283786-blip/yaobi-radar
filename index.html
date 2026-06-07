@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YaoBi Radar</title>
+<title>妖币雷达 - 合约版</title>
 <style>
 :root {
   --bg:#0a0a0f; --card:#13131a; --border:#1e1e2e; --text:#cdd6f4;
@@ -11,13 +11,12 @@
   --yellow:#f9e2af; --purple:#cba6f7;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:20px;min-height:100vh}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Microsoft YaHei','PingFang SC',sans-serif;padding:20px;min-height:100vh}
 .container{max-width:860px;margin:0 auto}
 .header{text-align:center;padding:30px 0 20px}
 .header h1{font-size:28px;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .header .sub{color:var(--muted);margin-top:6px;font-size:14px}
 
-/* Tabs */
 .tabs{display:flex;gap:4px;margin-bottom:24px;justify-content:center}
 .tab{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;transition:all .2s}
 .tab:hover{border-color:var(--accent);color:var(--text)}
@@ -28,24 +27,23 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;transition:border-color .2s}
 .card:hover{border-color:rgba(137,180,250,.3)}
-.badge-futures{display:inline-block;background:rgba(137,180,250,.15);color:var(--accent);font-size:10px;padding:2px 8px;border-radius:10px;margin-left:8px;font-weight:600;text-transform:uppercase}
-.contract-info{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;font-size:12px}
-.contract-info span{color:var(--muted)}
-.contract-info .oi{color:var(--accent)}
-.contract-info .funding{font-weight:600}
-.funding-neg{color:var(--green)}
-.funding-pos{color:var(--red)}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .rank{font-size:22px;font-weight:700;color:var(--purple);min-width:36px}
 .symbol{font-size:18px;font-weight:600;margin-left:8px}
 .score{font-size:13px;padding:4px 10px;border-radius:20px;font-weight:600}
 .score-hi{background:rgba(166,227,161,.15);color:var(--green)}
 .score-mid{background:rgba(249,226,175,.15);color:var(--yellow)}
+.badge-contract{display:inline-block;background:rgba(137,180,250,.15);color:var(--accent);font-size:10px;padding:2px 8px;border-radius:10px;margin-left:8px;font-weight:600}
 .anomaly{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;align-items:center}
 .anomaly:last-child{border:none}
-.a-type{font-weight:600;min-width:110px;color:var(--accent);font-size:12px}
+.a-type{font-weight:600;min-width:90px;color:var(--accent);font-size:12px}
 .a-score{color:var(--green);font-size:11px;margin-left:auto}
 .warning{color:var(--red);font-size:13px;margin-top:8px;padding:8px 12px;background:rgba(243,139,168,.1);border-radius:8px}
+.contract-row{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;font-size:12px}
+.contract-row span{color:var(--muted)}
+.contract-row .oi-v{color:var(--accent)}
+.funding-neg{color:var(--green);font-weight:600}
+.funding-pos{color:var(--red);font-weight:600}
 
 .ai-box{margin-top:24px;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:12px}
 .ai-box h3{color:var(--purple);margin-bottom:12px}
@@ -54,15 +52,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .history-item{padding:14px 20px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
 .history-item:hover{border-color:var(--accent)}
 .history-date{font-weight:600}
-.history-count{color:var(--green);font-size:13px}
 .history-link{color:var(--accent);font-size:13px;text-decoration:none}
 .history-link:hover{text-decoration:underline}
 
-.backtest-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}
-.backtest-table th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-weight:500}
-.backtest-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
-.backtest-table .up{color:var(--green)}
-.backtest-table .down{color:var(--red)}
+.bt-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}
+.bt-table th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-weight:500}
+.bt-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.bt-up{color:var(--green)} .bt-down{color:var(--red)}
 
 .footer{text-align:center;padding:30px;color:var(--muted);font-size:12px}
 .footer a{color:var(--muted)}
@@ -74,27 +70,36 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <body>
 <div class="container">
   <div class="header">
-    <h1>YaoBi Radar <span style="font-size:16px;color:var(--accent)">合约版</span></h1>
-    <div class="sub">Binance Futures · USDT Perpetual Contracts</div>
+    <h1>妖币雷达 · 合约版</h1>
+    <div class="sub">币安 U本位永续合约 · 市场结构异常扫描</div>
   </div>
 
   <div class="tabs">
-    <div class="tab active" onclick="switchTab('scan')">Latest Scan</div>
-    <div class="tab" onclick="switchTab('history')">History</div>
-    <div class="tab" onclick="switchTab('backtest')">Backtest</div>
+    <div class="tab active" onclick="switchTab('scan')">最新扫描</div>
+    <div class="tab" onclick="switchTab('history')">历史记录</div>
+    <div class="tab" onclick="switchTab('backtest')">复盘统计</div>
   </div>
 
   <div class="meta" id="meta"></div>
-  <div id="content"><div class="loading">Loading...</div></div>
+  <div id="content"><div class="loading">加载中...</div></div>
 
   <div class="footer">
-    Auto-scan every 4h via GitHub Actions ·
-    <a href="https://github.com/2458283786-blip/yaobi-radar">GitHub</a>
-    · No investment advice
+    每4小时自动扫描 · GitHub Actions ·
+    <a href="https://github.com/2458283786-blip/yaobi-radar">仓库</a>
+    · 不构成投资建议
   </div>
 </div>
 
 <script>
+const ANOMALY_LABELS = {
+  volatility_compression: '波动率压缩',
+  relative_strength: '相对强度',
+  oi_acceleration: 'OI加速',
+  volume_expansion: '成交量扩张',
+  funding_divergence: '费率背离',
+  oi_mc_divergence: '持仓比率',
+};
+
 let currentTab = 'scan';
 let scanData = null;
 
@@ -109,121 +114,122 @@ async function init() {
 function switchTab(tab) {
   currentTab = tab;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.tab:nth-child(${{scan:1,history:2,backtest:3}[tab]})`).classList.add('active');
+  const idx = {scan:0, history:1, backtest:2}[tab];
+  document.querySelectorAll('.tab')[idx].classList.add('active');
   if (tab === 'scan') renderScan();
   else if (tab === 'history') renderHistory();
   else if (tab === 'backtest') renderBacktest();
 }
 
 function renderScan() {
-  if (!scanData || !scanData.candidates) {
+  if (!scanData || !scanData.candidates || scanData.candidates.length === 0) {
     document.getElementById('meta').innerHTML = '';
-    document.getElementById('content').innerHTML = '<div class="error">No data yet. First scan running...</div>';
+    document.getElementById('content').innerHTML = '<div class="error">暂无数据，等待首次扫描完成...</div>';
     return;
   }
-
   const d = scanData;
-  document.getElementById('meta').innerHTML = `
-    <span>Updated: ${(d.updated||'').slice(0,16)}</span>
-    <span style="color:var(--yellow)">Market: ${d.regime||'?'}</span>
-    <span>Scanned: ${d.total_scanned||0} contracts</span>
-    <span style="color:var(--green)">Found: ${d.candidates.length} anomalies</span>
-  `;
+  document.getElementById('meta').innerHTML =
+    '<span>更新: '+(d.updated||'').slice(0,16)+'</span>'+
+    '<span style="color:var(--yellow)">市场: '+(d.regime==='Bull'?'牛市':d.regime==='Bear'?'熊市':'震荡')+'</span>'+
+    '<span>扫描: '+d.total_scanned+' 个合约</span>'+
+    '<span style="color:var(--green)">异常: '+d.candidates.length+' 个</span>';
 
-  // Deduplicate by symbol (keep highest score)
+  // Deduplicate
   const seen = new Map();
   d.candidates.forEach(c => {
-    if (!seen.has(c.symbol) || seen.get(c.symbol).score < c.score) {
-      seen.set(c.symbol, c);
-    }
+    if (!seen.has(c.symbol) || seen.get(c.symbol).score < c.score) seen.set(c.symbol, c);
   });
   const unique = [...seen.values()].sort((a,b) => b.score - a.score);
 
   let html = '';
   unique.forEach((c, i) => {
     const cls = c.score >= 50 ? 'score-hi' : 'score-mid';
-    html += `<div class="card">
-      <div class="card-header">
-        <div><span class="rank">#${i+1}</span><span class="symbol">${c.symbol}</span><span class="badge-futures">合约</span></div>
-        <span class="score ${cls}">${c.score.toFixed(1)}</span>
-      </div>`;
+    html += '<div class="card"><div class="card-header">'+
+      '<div><span class="rank">#'+(i+1)+'</span><span class="symbol">'+c.symbol+'</span>'+
+      '<span class="badge-contract">合约</span></div>'+
+      '<span class="score '+cls+'">'+c.score.toFixed(1)+' 分</span></div>';
+
+    // Contract info
+    const oiM = (c.oi / 1e6).toFixed(1);
+    const frPct = (c.funding * 100).toFixed(4);
+    const frCls = c.funding < 0 ? 'funding-neg' : 'funding-pos';
+    const volM = ((c.volume_24h||0) / 1e6).toFixed(1);
+    html += '<div class="contract-row">'+
+      '<span>持仓量: <span class="oi-v">'+oiM+'M</span></span>'+
+      '<span>资金费率: <span class="'+frCls+'">'+(c.funding>=0?'+':'')+frPct+'%</span></span>'+
+      '<span>24h成交: '+volM+'M USDT</span></div>';
+
+    // Anomalies
     if (c.anomalies) {
       c.anomalies.forEach(a => {
-        html += `<div class="anomaly">
-          <span class="a-type">${a.type}</span><span>${a.detail}</span>
-          <span class="a-score">${a.score}</span></div>`;
+        html += '<div class="anomaly">'+
+          '<span class="a-type">'+ (ANOMALY_LABELS[a.type] || a.type) +'</span>'+
+          '<span>'+a.detail+'</span>'+
+          '<span class="a-score">'+a.score+'分</span></div>';
       });
     }
+
     if (c.warnings && c.warnings.length) {
-      html += `<div class="warning">WARNING: ${c.warnings.join(', ')}</div>`;
+      html += '<div class="warning">⚠️ 风险: '+c.warnings.join(', ')+'</div>';
     }
     html += '</div>';
   });
 
   document.getElementById('content').innerHTML = html;
 
-  // AI analysis
-  fetch('ai_analysis.md?v=' + Date.now()).then(r => r.ok ? r.text() : null).then(text => {
-    if (text) {
+  // AI
+  fetch('ai_analysis.md?v='+Date.now()).then(r => r.ok?r.text():null).then(t => {
+    if (t) {
       document.getElementById('content').insertAdjacentHTML('beforeend',
-        `<div class="ai-box"><h3>AI Analysis</h3><pre>${text}</pre></div>`);
+        '<div class="ai-box"><h3>🤖 AI 解读</h3><pre>'+t+'</pre></div>');
     }
   }).catch(()=>{});
 }
 
 async function renderHistory() {
   document.getElementById('meta').innerHTML = '';
-  // Fetch list of report files from GitHub API
   try {
     const r = await fetch('https://api.github.com/repos/2458283786-blip/yaobi-radar/contents/docs?ref=master');
     const files = await r.json();
-    const reports = files
-      .filter(f => f.name.startsWith('report-') && f.name.endsWith('.md'))
+    const reports = files.filter(f => f.name.startsWith('report-') && f.name.endsWith('.md'))
       .sort((a,b) => b.name.localeCompare(a.name));
-
     if (!reports.length) {
-      document.getElementById('content').innerHTML = '<div class="empty">No historical reports yet. Check back after a few scan cycles.</div>';
+      document.getElementById('content').innerHTML = '<div class="empty">暂无历史报告，等待几次扫描后自动积累</div>';
       return;
     }
-
     let html = '';
     reports.forEach(f => {
-      const date = f.name.replace('report-','').replace('.md','');
-      html += `<div class="history-item">
-        <span class="history-date">${date}</span>
-        <a class="history-link" href="${f.download_url}" target="_blank">View Report</a>
-      </div>`;
+      const d = f.name.replace('report-','').replace('.md','');
+      html += '<div class="history-item"><span class="history-date">'+d+'</span>'+
+        '<a class="history-link" href="'+f.download_url+'" target="_blank">查看报告</a></div>';
     });
     document.getElementById('content').innerHTML = html;
   } catch(e) {
-    document.getElementById('content').innerHTML = '<div class="error">Failed to load history. <a href="https://github.com/2458283786-blip/yaobi-radar/tree/master/docs" style="color:var(--accent)">View on GitHub</a></div>';
+    document.getElementById('content').innerHTML = '<div class="error">加载失败，<a href="https://github.com/2458283786-blip/yaobi-radar/tree/master/docs" style="color:var(--accent)">在GitHub查看</a></div>';
   }
 }
 
 async function renderBacktest() {
   document.getElementById('meta').innerHTML = '';
   try {
-    const r = await fetch('backtest.json?v=' + Date.now());
+    const r = await fetch('backtest.json?v='+Date.now());
     const d = await r.json();
     if (!d.entries || !d.entries.length) {
-      document.getElementById('content').innerHTML = '<div class="empty">Backtest data accumulating... Needs 7+ days of scan history.</div>';
+      document.getElementById('content').innerHTML = '<div class="empty">复盘数据积累中...需要至少7天扫描历史</div>';
       return;
     }
-
-    let html = `<p style="margin-bottom:16px;color:var(--muted)">Hit rate tracking for past scan candidates (7d returns)</p>
-    <table class="backtest-table">
-      <tr><th>Date</th><th>Symbol</th><th>Entry Price</th><th>7d Return</th></tr>`;
+    let html = '<p style="margin-bottom:16px;color:var(--muted)">历史候选标的 7日收益追踪</p>'+
+      '<table class="bt-table"><tr><th>日期</th><th>币种</th><th>入选价</th><th>7日收益</th></tr>';
     d.entries.forEach(e => {
-      const cls = e.ret7d >= 0 ? 'up' : 'down';
-      html += `<tr>
-        <td>${e.date}</td><td>${e.symbol}</td><td>${e.price?.toFixed(6)||'N/A'}</td>
-        <td class="${cls}">${e.ret7d != null ? (e.ret7d>0?'+':'')+e.ret7d.toFixed(1)+'%' : 'pending'}</td>
-      </tr>`;
+      const cls = e.ret7d >= 0 ? 'bt-up' : 'bt-down';
+      html += '<tr><td>'+e.date+'</td><td>'+e.symbol+'</td>'+
+        '<td>'+(e.price?e.price.toFixed(6):'--')+'</td>'+
+        '<td class="'+cls+'">'+(e.ret7d!=null?(e.ret7d>0?'+':'')+e.ret7d.toFixed(1)+'%':'待统计')+'</td></tr>';
     });
     html += '</table>';
     document.getElementById('content').innerHTML = html;
   } catch(e) {
-    document.getElementById('content').innerHTML = '<div class="empty">Backtest data not yet available. Requires 7+ days of scan history.</div>';
+    document.getElementById('content').innerHTML = '<div class="empty">复盘数据尚未生成，需7天扫描积累</div>';
   }
 }
 
@@ -231,6 +237,3 @@ init();
 </script>
 </body>
 </html>
-
-
-
