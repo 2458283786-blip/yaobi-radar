@@ -28,6 +28,13 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;transition:border-color .2s}
 .card:hover{border-color:rgba(137,180,250,.3)}
+.badge-futures{display:inline-block;background:rgba(137,180,250,.15);color:var(--accent);font-size:10px;padding:2px 8px;border-radius:10px;margin-left:8px;font-weight:600;text-transform:uppercase}
+.contract-info{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;font-size:12px}
+.contract-info span{color:var(--muted)}
+.contract-info .oi{color:var(--accent)}
+.contract-info .funding{font-weight:600}
+.funding-neg{color:var(--green)}
+.funding-pos{color:var(--red)}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .rank{font-size:22px;font-weight:700;color:var(--purple);min-width:36px}
 .symbol{font-size:18px;font-weight:600;margin-left:8px}
@@ -67,8 +74,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <body>
 <div class="container">
   <div class="header">
-    <h1>YaoBi Radar</h1>
-    <div class="sub">Market Structure Anomaly Scanner</div>
+    <h1>YaoBi Radar <span style="font-size:16px;color:var(--accent)">合约版</span></h1>
+    <div class="sub">Binance Futures · USDT Perpetual Contracts</div>
   </div>
 
   <div class="tabs">
@@ -137,7 +144,7 @@ function renderScan() {
     const cls = c.score >= 50 ? 'score-hi' : 'score-mid';
     html += `<div class="card">
       <div class="card-header">
-        <div><span class="rank">#${i+1}</span><span class="symbol">${c.symbol}</span></div>
+        <div><span class="rank">#${i+1}</span><span class="symbol">${c.symbol}</span><span class="badge-futures">合约</span></div>
         <span class="score ${cls}">${c.score.toFixed(1)}</span>
       </div>`;
     if (c.anomalies) {
@@ -224,3 +231,5 @@ init();
 </script>
 </body>
 </html>
+
+
