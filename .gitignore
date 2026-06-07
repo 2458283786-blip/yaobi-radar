@@ -1,0 +1,18 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Data (committed via CI, ignored locally)
+# data/
+
+# Outputs
+outputs/*.txt
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
