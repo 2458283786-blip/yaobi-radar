@@ -139,7 +139,7 @@ def main():
     # Save history manifest
     import glob
     history_files = sorted(glob.glob("docs/report-*.md"), reverse=True)
-    history_list = [f.replace("docs/","").replace(".md","").replace("report-","") for f in history_files[:30]]
+    history_list = [f.replace("\\","/").replace("docs/","").replace(".md","").replace("report-","") for f in history_files[:30]]
     with open("docs/history.json", "w", encoding="utf-8") as f:
         json.dump({"reports": history_list}, f)
     with open("history.json", "w", encoding="utf-8") as f:
