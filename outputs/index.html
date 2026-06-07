@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YaoBi Radar - Market Structure Scanner</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #13131a;
+  --border: #1e1e2e;
+  --text: #cdd6f4;
+  --muted: #6c7086;
+  --accent: #89b4fa;
+  --red: #f38ba8;
+  --green: #a6e3a1;
+  --yellow: #f9e2af;
+  --purple: #cba6f7;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding:20px; min-height:100vh; }
+.container { max-width:800px; margin:0 auto; }
+.header { text-align:center; padding:30px 0; }
+.header h1 { font-size:28px; background:linear-gradient(135deg, var(--accent), var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.header .sub { color:var(--muted); margin-top:6px; font-size:14px; }
+.meta { display:flex; gap:16px; justify-content:center; margin:16px 0; flex-wrap:wrap; }
+.meta span { background:var(--card); border:1px solid var(--border); padding:6px 14px; border-radius:20px; font-size:13px; }
+.meta .regime { color:var(--yellow); }
+.card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:12px; transition:border-color .2s; }
+.card:hover { border-color:var(--accent); }
+.card-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.rank { font-size:24px; font-weight:700; color:var(--purple); }
+.symbol { font-size:18px; font-weight:600; }
+.score { font-size:14px; padding:4px 10px; border-radius:20px; font-weight:600; }
+.score-high { background:rgba(166,227,161,.15); color:var(--green); }
+.score-mid { background:rgba(249,226,175,.15); color:var(--yellow); }
+.anomaly { display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid var(--border); font-size:14px; }
+.anomaly:last-child { border-bottom:none; }
+.anomaly-type { font-weight:600; min-width:100px; color:var(--accent); }
+.anomaly-score { color:var(--green); font-size:12px; }
+.warning { color:var(--red); font-size:13px; margin-top:8px; padding:6px 10px; background:rgba(243,139,168,.1); border-radius:8px; }
+.footer { text-align:center; padding:30px; color:var(--muted); font-size:12px; }
+.loading { text-align:center; padding:60px; color:var(--muted); }
+.error { text-align:center; padding:60px; color:var(--red); }
+.refresh { cursor:pointer; color:var(--accent); text-decoration:underline; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>YaoBi Radar</h1>
+    <div class="sub">Market Structure Anomaly Scanner &middot; Not price prediction</div>
+    <div class="meta" id="meta"></div>
+  </div>
+  <div id="content"><div class="loading">Loading data...</div></div>
+  <div class="footer">
+    Updated every 4 hours via GitHub Actions &middot;
+    <a href="https://github.com/2458283786-blip/yaobi-radar" style="color:var(--muted)">View on GitHub</a>
+  </div>
+</div>
+
+<script>
+async function load() {
+  try {
+    const r = await fetch('data.json');
+    const d = await r.json();
+    render(d);
+  } catch(e) {
+    document.getElementById('content').innerHTML = '<div class="error">Failed to load data. Try refreshing.</div>';
+  }
+}
+
+function render(d) {
+  document.getElementById('meta').innerHTML = `
+    <span>Updated: ${d.updated?.slice(0,16)||'N/A'}</span>
+    <span class="regime">Regime: ${d.regime||'?'}</span>
+    <span>Scanned: ${d.total_scanned||0} contracts</span>
+    <span>Candidates: ${d.candidates?.length||0}</span>
+  `;
+
+  if (!d.candidates || d.candidates.length === 0) {
+    document.getElementById('content').innerHTML = '<div class="loading">No anomalies detected this cycle.</div>';
+    return;
+  }
+
+  let html = '';
+  d.candidates.forEach((c, i) => {
+    const cls = c.score >= 50 ? 'score-high' : 'score-mid';
+    html += `<div class="card">
+      <div class="card-header">
+        <div><span class="rank">#${c.rank}</span> <span class="symbol">${c.symbol}</span></div>
+        <span class="score ${cls}">${c.score.toFixed(1)}</span>
+      </div>`;
+
+    if (c.anomalies) {
+      c.anomalies.forEach(a => {
+        html += `<div class="anomaly">
+          <span class="anomaly-type">${a.type}</span>
+          <span>${a.detail}</span>
+          <span class="anomaly-score">+${a.score}</span>
+        </div>`;
+      });
+    }
+
+    if (c.warnings && c.warnings.length > 0) {
+      html += `<div class="warning">WARNING: ${c.warnings.join(', ')}</div>`;
+    }
+
+    html += '</div>';
+  });
+
+  document.getElementById('content').innerHTML = html;
+}
+
+load();
+</script>
+</body>
+</html>

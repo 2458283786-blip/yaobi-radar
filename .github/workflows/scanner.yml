@@ -2,10 +2,13 @@
 
 on:
   schedule:
-    # UTC时间: 00:00, 04:00, 08:00, 12:00, 16:00, 20:00
-    # = 北京时间: 08:00, 12:00, 16:00, 20:00, 00:00, 04:00
     - cron: "0 0,4,8,12,16,20 * * *"
-  workflow_dispatch:  # 手动触发
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   scan:
@@ -13,18 +16,13 @@ jobs:
     timeout-minutes: 25
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
-        run: pip install requests numpy
-
-      - name: Restore DB from cache
+      - name: Restore DB
         uses: actions/cache@v4
         with:
           path: data/market.db
@@ -34,20 +32,25 @@ jobs:
       - name: Run scanner
         run: python scanner.py
 
-      - name: Upload report artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: scan-report-${{ github.run_id }}
-          path: |
-            data/market.db
-            
+      - name: Send notifications
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          BARK_URL: ${{ secrets.BARK_URL }}
+        run: python src/notify.py
+        continue-on-error: true
 
-      - name: Commit & push DB update
+      - name: Commit & push
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/  2>/dev/null || true
+          git config user.email "actions@github.com"
+          git add data/ outputs/ 2>/dev/null || true
           git diff --staged --quiet || git commit -m "scan: $(date -u +%Y-%m-%d_%H:%M)"
           git push
-        continue-on-error: true
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages
 

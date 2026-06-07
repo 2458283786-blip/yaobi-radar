@@ -129,6 +129,31 @@ def main():
         f.write(f"# Latest Scan: {today}\n\n")
         f.write(summary)
         f.write("\n\n[View all reports](https://github.com/2458283786-blip/yaobi-radar/tree/master/outputs)\n")
+    
+    # 9. Save JSON for web/telegram
+    import json
+    json_data = {
+        "updated": datetime.now().isoformat(),
+        "regime": regime,
+        "total_scanned": len(snapshots),
+        "candidates": []
+    }
+    for r in results[:10]:
+        top_anoms = sorted(
+            [(k, {"score": v["score"], "detail": v["detail"]}) 
+             for k, v in r["anomalies"].items() if v["score"] >= 30],
+            key=lambda x: x[1]["score"], reverse=True
+        )[:3]
+        json_data["candidates"].append({
+            "rank": results.index(r) + 1,
+            "symbol": r["symbol"],
+            "score": r["composite_score"],
+            "anomalies": [{"type": k, "score": v["score"], "detail": v["detail"]} for k, v in top_anoms],
+            "warnings": [w["pattern"] for w in r.get("failure_warnings", [])],
+        })
+    with open("outputs/data.json", "w", encoding="utf-8") as f:
+        json.dump(json_data, f, ensure_ascii=False, indent=2)
+    print("JSON saved: outputs/data.json")
     print(f"\nReport saved: {report_path}")
 
     print(f"\n{'='*72}")
@@ -148,5 +173,6 @@ if __name__ == "__main__":
         print(f"\nError: {e}")
         import traceback
         traceback.print_exc()
+
 
 
