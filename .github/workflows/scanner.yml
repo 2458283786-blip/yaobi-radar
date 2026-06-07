@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   scan:
@@ -48,13 +46,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
-          git add data/ outputs/ 2>/dev/null || true
+          git add data/ docs/ 2>/dev/null || true
           git diff --staged --quiet || git commit -m "scan: $(date -u +%Y-%m-%d_%H:%M)"
           git push
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_name: github-pages
+
+
 
 

@@ -6,7 +6,7 @@ __pycache__/
 # Data (committed via CI, ignored locally)
 # data/
 
-# Outputs (committed)\n
+# Docs (committed for GitHub Pages)
 # IDE
 .vscode/
 .idea/
@@ -14,4 +14,5 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
 

@@ -65,9 +65,10 @@ def send_telegram(data: dict):
 
 
 if __name__ == "__main__":
-    with open("outputs/data.json", "r", encoding="utf-8") as f:
+    with open("docs/data.json", "r", encoding="utf-8") as f:
         data = json.load(f)
     pp = send_pushplus(data)
     tg = send_telegram(data)
     print(f"PushPlus(WeChat): {'OK' if pp else 'skip'}  |  Telegram: {'OK' if tg else 'skip'}")
+
 

@@ -114,9 +114,9 @@ def main():
             save_backtest(r["symbol"], today, price_vals[0])
     save_ranking(today, rankings)
 
-    # 8. Save readable report to outputs/
+    # 8. Save readable report to docs/
     os.makedirs("outputs", exist_ok=True)
-    report_path = f"outputs/report-{today}.md"
+    report_path = f"docs/report-{today}.md"
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(summary)
         f.write("\n\n## Top5 Detailed\n\n")
@@ -125,7 +125,7 @@ def main():
             if rep:
                 f.write(rep + "\n\n")
     # Also write latest as index
-    with open("outputs/report.md", "w", encoding="utf-8") as f:
+    with open("docs/report.md", "w", encoding="utf-8") as f:
         f.write(f"# Latest Scan: {today}\n\n")
         f.write(summary)
         f.write("\n\n[View all reports](https://github.com/2458283786-blip/yaobi-radar/tree/master/outputs)\n")
@@ -152,9 +152,9 @@ def main():
     print("\n[AI] Running AI analysis...")
     ai_result = analyze_with_ai(top10, regime)
     if ai_result:
-        with open("outputs/ai_analysis.md", "w", encoding="utf-8") as f:
+        with open("docs/ai_analysis.md", "w", encoding="utf-8") as f:
             f.write(ai_result)
-        with open("outputs/report.md", "a", encoding="utf-8") as f:
+        with open("docs/report.md", "a", encoding="utf-8") as f:
             f.write("\n\n" + ai_result)
         print("AI analysis added to report")
     else:
@@ -165,9 +165,9 @@ def main():
             "anomalies": [{"type": k, "score": v["score"], "detail": v["detail"]} for k, v in top_anoms],
             "warnings": [w["pattern"] for w in r.get("failure_warnings", [])],
         })
-    with open("outputs/data.json", "w", encoding="utf-8") as f:
+    with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
-    print("JSON saved: outputs/data.json")
+    print("JSON saved: docs/data.json")
     print(f"\nReport saved: {report_path}")
 
     print(f"\n{'='*72}")
@@ -187,6 +187,7 @@ if __name__ == "__main__":
         print(f"\nError: {e}")
         import traceback
         traceback.print_exc()
+
 
 
 

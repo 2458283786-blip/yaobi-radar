@@ -82,13 +82,14 @@ def analyze_with_ai(candidates: list, regime: str) -> str:
 
 
 if __name__ == "__main__":
-    with open("outputs/data.json", "r", encoding="utf-8") as f:
+    with open("docs/data.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
     result = analyze_with_ai(data["candidates"], data["regime"])
     if result:
-        with open("outputs/ai_analysis.md", "w", encoding="utf-8") as f:
+        with open("docs/ai_analysis.md", "w", encoding="utf-8") as f:
             f.write(result)
-        print("AI analysis saved to outputs/ai_analysis.md")
+        print("AI analysis saved to docs/ai_analysis.md")
     else:
         print("AI analysis skipped (no API key or error)")
+
