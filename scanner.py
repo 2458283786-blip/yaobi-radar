@@ -135,7 +135,16 @@ def main():
         conn.close()
         with open("docs/backtest.json", "w", encoding="utf-8") as f:
             json.dump({"updated": today, "entries": bt}, f, ensure_ascii=False, indent=2)
-        print("Backtest saved")
+        
+    # Save history manifest
+    import glob
+    history_files = sorted(glob.glob("docs/report-*.md"), reverse=True)
+    history_list = [f.replace("docs/","").replace(".md","").replace("report-","") for f in history_files[:30]]
+    with open("docs/history.json", "w", encoding="utf-8") as f:
+        json.dump({"reports": history_list}, f)
+    with open("history.json", "w", encoding="utf-8") as f:
+        json.dump({"reports": history_list}, f)
+    print("Backtest saved")
     except: pass
 
     # Save rankings for future backtest
@@ -157,3 +166,4 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\nError: {e}")
         import traceback; traceback.print_exc()
+
