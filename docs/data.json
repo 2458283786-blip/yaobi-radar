@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-07T23:29:49.818944",
+  "updated": "2026-06-07T23:43:24.672714",
   "regime": "Sideways",
   "total_scanned": 95,
   "candidates": [
@@ -16,20 +16,22 @@
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+16.4% vs BTC): 独立走强"
+          "detail": "相对强度显著(+13.4% vs BTC): 独立走强"
         }
       ],
       "warnings": [],
-      "oi": 252696115.8,
+      "oi": 251945974.2,
       "funding": -0.00073506,
-      "volume_24h": 98356900.337505,
+      "volume_24h": 96390538.911721,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     },
     {
       "rank": 2,
       "symbol": "GUNUSDT",
-      "score": 49.0,
+      "score": 50.0,
       "anomalies": [
         {
           "type": "relative_strength",
@@ -43,9 +45,11 @@
         }
       ],
       "warnings": [],
-      "oi": 414458623.0,
+      "oi": 413270499.0,
       "funding": -0.00309141,
-      "volume_24h": 23093994.532265,
+      "volume_24h": 22957029.322377,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     },
@@ -62,13 +66,15 @@
         {
           "type": "relative_strength",
           "score": 35,
-          "detail": "略微跑赢大盘(+3.5%)"
+          "detail": "略微跑赢大盘(+3.2%)"
         }
       ],
       "warnings": [],
-      "oi": 261417361.0,
+      "oi": 261510307.0,
       "funding": -3.036e-05,
-      "volume_24h": 217816688.9954,
+      "volume_24h": 217176155.39122,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     },
@@ -85,13 +91,15 @@
         {
           "type": "relative_strength",
           "score": 60,
-          "detail": "相对强度偏强(+7.4% vs BTC)"
+          "detail": "相对强度偏强(+7.2% vs BTC)"
         }
       ],
       "warnings": [],
-      "oi": 182000.33,
+      "oi": 181930.37,
       "funding": 0.0,
-      "volume_24h": 73999424.8973,
+      "volume_24h": 74325363.1822,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     },
@@ -103,7 +111,7 @@
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+23.5% vs BTC): 独立走强"
+          "detail": "相对强度显著(+22.6% vs BTC): 独立走强"
         },
         {
           "type": "volatility_compression",
@@ -112,9 +120,11 @@
         }
       ],
       "warnings": [],
-      "oi": 4162623.0,
+      "oi": 4159517.0,
       "funding": 5e-05,
-      "volume_24h": 477392312.44419,
+      "volume_24h": 472887815.71861,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     },
@@ -126,18 +136,20 @@
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+29.5% vs BTC): 独立走强"
+          "detail": "相对强度显著(+29.8% vs BTC): 独立走强"
         },
         {
           "type": "oi_mc_divergence",
           "score": 30,
-          "detail": "OI/Vol比微升(+5%)"
+          "detail": "OI/Vol比微升(+9%)"
         }
       ],
       "warnings": [],
-      "oi": 160235441.0,
+      "oi": 159773285.0,
       "funding": -0.001044,
-      "volume_24h": 172211468.34528,
+      "volume_24h": 171070331.21349,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     },
@@ -149,7 +161,7 @@
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+11.0% vs BTC): 独立走强"
+          "detail": "相对强度显著(+10.6% vs BTC): 独立走强"
         },
         {
           "type": "volatility_compression",
@@ -158,44 +170,23 @@
         }
       ],
       "warnings": [],
-      "oi": 29542144.0,
+      "oi": 29531671.8,
       "funding": 8.57e-06,
-      "volume_24h": 135773735.94149,
+      "volume_24h": 135516773.46216,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     },
     {
       "rank": 8,
-      "symbol": "VELVETUSDT",
+      "symbol": "BSBUSDT",
       "score": 44.0,
       "anomalies": [
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+50.7% vs BTC): 独立走强"
-        },
-        {
-          "type": "oi_mc_divergence",
-          "score": 30,
-          "detail": "OI/Vol比微升(+6%)"
-        }
-      ],
-      "warnings": [],
-      "oi": 57952343.0,
-      "funding": 0.00064787,
-      "volume_24h": 64799127.44558,
-      "social_heat": "未知",
-      "twitter_followers": 0
-    },
-    {
-      "rank": 9,
-      "symbol": "BSBUSDT",
-      "score": 43.0,
-      "anomalies": [
-        {
-          "type": "relative_strength",
-          "score": 85,
-          "detail": "相对强度显著(+60.8% vs BTC): 独立走强"
+          "detail": "相对强度显著(+71.6% vs BTC): 独立走强"
         },
         {
           "type": "volatility_compression",
@@ -204,34 +195,61 @@
         }
       ],
       "warnings": [],
-      "oi": 55309392.0,
+      "oi": 55606106.0,
       "funding": 7.08e-05,
-      "volume_24h": 116806144.81778,
+      "volume_24h": 124659958.18429,
+      "crash_risk": 0,
+      "crash_warnings": [],
+      "social_heat": "未知",
+      "twitter_followers": 0
+    },
+    {
+      "rank": 9,
+      "symbol": "VELVETUSDT",
+      "score": 44.0,
+      "anomalies": [
+        {
+          "type": "relative_strength",
+          "score": 85,
+          "detail": "相对强度显著(+51.9% vs BTC): 独立走强"
+        },
+        {
+          "type": "oi_mc_divergence",
+          "score": 30,
+          "detail": "OI/Vol比微升(+10%)"
+        }
+      ],
+      "warnings": [],
+      "oi": 57980504.0,
+      "funding": 0.00064787,
+      "volume_24h": 63803418.148,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     },
     {
       "rank": 10,
-      "symbol": "ESPORTSUSDT",
-      "score": 43.0,
+      "symbol": "PARTIUSDT",
+      "score": 44.0,
       "anomalies": [
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+60.2% vs BTC): 独立走强"
+          "detail": "相对强度显著(+14.6% vs BTC): 独立走强"
         },
         {
-          "type": "volatility_compression",
+          "type": "oi_mc_divergence",
           "score": 30,
-          "detail": "波动率正常偏低(分位30%)"
+          "detail": "OI/Vol比微升(+8%)"
         }
       ],
-      "warnings": [
-        "高费率陷阱"
-      ],
-      "oi": 196698049.0,
-      "funding": 0.00105637,
-      "volume_24h": 29267999.64753,
+      "warnings": [],
+      "oi": 155457615.0,
+      "funding": 5e-05,
+      "volume_24h": 21149136.31182,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0
     }

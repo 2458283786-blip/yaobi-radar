@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from src.db import init_db, insert_snapshot, save_ranking, save_backtest
 from src.collector import *
 from src.analyzer import detect_all_anomalies, assess_market_regime
+from src.crash_detector import detect_crash_risks
 from src.report import generate_report, generate_summary
 from src.config import TOP_N_VOLUME, TOP_K_OUTPUT, EXCLUDE_SYMBOLS
 from datetime import datetime
@@ -64,7 +65,11 @@ def main():
             if not kl or len(kl) < 30: continue
             a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl)
             if a["composite_score"] >= 30: results.append(a)
+            crash = detect_crash_risks(snap["symbol"], kl, snap)
+            if crash["score"] >= 20: crash_results.append({"symbol": snap["symbol"], **crash})
         except: continue
+
+    crash_results = []
 
     results.sort(key=lambda x: x["composite_score"], reverse=True)
     top10 = results[:TOP_K_OUTPUT]
@@ -111,6 +116,8 @@ def main():
             "oi": snap.get("oi", 0),
             "funding": snap.get("funding", 0),
             "volume_24h": snap.get("volume_24h", 0),
+            "crash_risk": next((cr["score"] for cr in crash_results if cr["symbol"] == r["symbol"]), 0),
+            "crash_warnings": [w["type"] for w in next((cr["warnings"] for cr in crash_results if cr["symbol"] == r["symbol"]), [])],
             "social_heat": social_data.get(r["symbol"], {}).get("social_heat", "未知"),
             "twitter_followers": social_data.get(r["symbol"], {}).get("twitter_followers", 0),
         })

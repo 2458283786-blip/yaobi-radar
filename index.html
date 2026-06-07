@@ -124,6 +124,7 @@ function renderScan(){
     if(c.anomalies) c.anomalies.forEach(function(a){
       h+='<div class="ano"><span class="at">'+(AL[a.type]||a.type)+'</span><span>'+a.detail+'</span><span class="av">'+a.score+'分</span></div>';
     });
+    var cr=c.crash_risk||0;if(cr>=30)h+='<div class="warn" style="background:rgba(243,139,168,.15)">????: '+cr+'? | '+((c.crash_warnings||[]).join(', '))+'</div>';else if(cr>=15)h+='<div class="warn" style="background:rgba(249,226,175,.1);color:var(--yellow)">????: '+cr+'? | '+((c.crash_warnings||[]).join(', '))+'</div>';
     if(c.warnings&&c.warnings.length) h+='<div class="warn">风险: '+c.warnings.join(', ')+'</div>';
     var sh=c.social_heat||'?';var sc=sh.indexOf('??')>=0||sh.indexOf('?')>=0?'fn':'fp';h+='<div class="crow"><span>??: <span class="'+sc+'">'+sh+'</span></span></div>';h+='</div>';
   });
