@@ -1,12 +1,12 @@
 {
-  "updated": "2026-06-07T22:38:59.093760",
+  "updated": "2026-06-07T23:29:49.818944",
   "regime": "Sideways",
   "total_scanned": 95,
   "candidates": [
     {
       "rank": 1,
       "symbol": "PORTALUSDT",
-      "score": 61.5,
+      "score": 62.5,
       "anomalies": [
         {
           "type": "volatility_compression",
@@ -20,9 +20,11 @@
         }
       ],
       "warnings": [],
-      "oi": 261079788.5,
+      "oi": 252696115.8,
       "funding": -0.00073506,
-      "volume_24h": 103797637.187891
+      "volume_24h": 98356900.337505,
+      "social_heat": "未知",
+      "twitter_followers": 0
     },
     {
       "rank": 2,
@@ -32,7 +34,7 @@
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+10.9% vs BTC): 独立走强"
+          "detail": "相对强度显著(+11.6% vs BTC): 独立走强"
         },
         {
           "type": "volatility_compression",
@@ -41,14 +43,16 @@
         }
       ],
       "warnings": [],
-      "oi": 0.0,
-      "funding": 0.0,
-      "volume_24h": 22776321.460787
+      "oi": 414458623.0,
+      "funding": -0.00309141,
+      "volume_24h": 23093994.532265,
+      "social_heat": "未知",
+      "twitter_followers": 0
     },
     {
       "rank": 3,
       "symbol": "XLMUSDT",
-      "score": 46.5,
+      "score": 47.5,
       "anomalies": [
         {
           "type": "volatility_compression",
@@ -58,18 +62,20 @@
         {
           "type": "relative_strength",
           "score": 35,
-          "detail": "略微跑赢大盘(+3.7%)"
+          "detail": "略微跑赢大盘(+3.5%)"
         }
       ],
       "warnings": [],
-      "oi": 263231538.0,
+      "oi": 261417361.0,
       "funding": -3.036e-05,
-      "volume_24h": 219173782.66664
+      "volume_24h": 217816688.9954,
+      "social_heat": "未知",
+      "twitter_followers": 0
     },
     {
       "rank": 4,
       "symbol": "MRVLUSDT",
-      "score": 46.0,
+      "score": 47.0,
       "anomalies": [
         {
           "type": "volatility_compression",
@@ -79,23 +85,25 @@
         {
           "type": "relative_strength",
           "score": 60,
-          "detail": "相对强度偏强(+7.8% vs BTC)"
+          "detail": "相对强度偏强(+7.4% vs BTC)"
         }
       ],
       "warnings": [],
-      "oi": 183111.14,
+      "oi": 182000.33,
       "funding": 0.0,
-      "volume_24h": 68928834.6648
+      "volume_24h": 73999424.8973,
+      "social_heat": "未知",
+      "twitter_followers": 0
     },
     {
       "rank": 5,
       "symbol": "LABUSDT",
-      "score": 43.0,
+      "score": 44.0,
       "anomalies": [
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+24.8% vs BTC): 独立走强"
+          "detail": "相对强度显著(+23.5% vs BTC): 独立走强"
         },
         {
           "type": "volatility_compression",
@@ -104,19 +112,44 @@
         }
       ],
       "warnings": [],
-      "oi": 4128157.0,
+      "oi": 4162623.0,
       "funding": 5e-05,
-      "volume_24h": 477803199.66447
+      "volume_24h": 477392312.44419,
+      "social_heat": "未知",
+      "twitter_followers": 0
     },
     {
       "rank": 6,
-      "symbol": "TONUSDT",
-      "score": 43.0,
+      "symbol": "HUSDT",
+      "score": 44.0,
       "anomalies": [
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+10.6% vs BTC): 独立走强"
+          "detail": "相对强度显著(+29.5% vs BTC): 独立走强"
+        },
+        {
+          "type": "oi_mc_divergence",
+          "score": 30,
+          "detail": "OI/Vol比微升(+5%)"
+        }
+      ],
+      "warnings": [],
+      "oi": 160235441.0,
+      "funding": -0.001044,
+      "volume_24h": 172211468.34528,
+      "social_heat": "未知",
+      "twitter_followers": 0
+    },
+    {
+      "rank": 7,
+      "symbol": "TONUSDT",
+      "score": 44.0,
+      "anomalies": [
+        {
+          "type": "relative_strength",
+          "score": 85,
+          "detail": "相对强度显著(+11.0% vs BTC): 独立走强"
         },
         {
           "type": "volatility_compression",
@@ -125,19 +158,44 @@
         }
       ],
       "warnings": [],
-      "oi": 29738868.7,
+      "oi": 29542144.0,
       "funding": 8.57e-06,
-      "volume_24h": 136997820.92106
+      "volume_24h": 135773735.94149,
+      "social_heat": "未知",
+      "twitter_followers": 0
     },
     {
-      "rank": 7,
+      "rank": 8,
+      "symbol": "VELVETUSDT",
+      "score": 44.0,
+      "anomalies": [
+        {
+          "type": "relative_strength",
+          "score": 85,
+          "detail": "相对强度显著(+50.7% vs BTC): 独立走强"
+        },
+        {
+          "type": "oi_mc_divergence",
+          "score": 30,
+          "detail": "OI/Vol比微升(+6%)"
+        }
+      ],
+      "warnings": [],
+      "oi": 57952343.0,
+      "funding": 0.00064787,
+      "volume_24h": 64799127.44558,
+      "social_heat": "未知",
+      "twitter_followers": 0
+    },
+    {
+      "rank": 9,
       "symbol": "BSBUSDT",
       "score": 43.0,
       "anomalies": [
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+49.4% vs BTC): 独立走强"
+          "detail": "相对强度显著(+60.8% vs BTC): 独立走强"
         },
         {
           "type": "volatility_compression",
@@ -146,19 +204,21 @@
         }
       ],
       "warnings": [],
-      "oi": 52766592.0,
+      "oi": 55309392.0,
       "funding": 7.08e-05,
-      "volume_24h": 84451603.83297
+      "volume_24h": 116806144.81778,
+      "social_heat": "未知",
+      "twitter_followers": 0
     },
     {
-      "rank": 8,
+      "rank": 10,
       "symbol": "ESPORTSUSDT",
       "score": 43.0,
       "anomalies": [
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+55.6% vs BTC): 独立走强"
+          "detail": "相对强度显著(+60.2% vs BTC): 独立走强"
         },
         {
           "type": "volatility_compression",
@@ -166,47 +226,14 @@
           "detail": "波动率正常偏低(分位30%)"
         }
       ],
-      "warnings": [],
-      "oi": 0.0,
-      "funding": 0.0,
-      "volume_24h": 27681297.48325
-    },
-    {
-      "rank": 9,
-      "symbol": "UBUSDT",
-      "score": 43.0,
-      "anomalies": [
-        {
-          "type": "relative_strength",
-          "score": 85,
-          "detail": "相对强度显著(+31.8% vs BTC): 独立走强"
-        },
-        {
-          "type": "volatility_compression",
-          "score": 30,
-          "detail": "波动率正常偏低(分位27%)"
-        }
+      "warnings": [
+        "高费率陷阱"
       ],
-      "warnings": [],
-      "oi": 0.0,
-      "funding": 0.0,
-      "volume_24h": 25706816.88523
-    },
-    {
-      "rank": 10,
-      "symbol": "CLUSDT",
-      "score": 40.5,
-      "anomalies": [
-        {
-          "type": "volatility_compression",
-          "score": 90,
-          "detail": "波动率极度压缩(带宽5.2%, 分位3%)"
-        }
-      ],
-      "warnings": [],
-      "oi": 1250756.53,
-      "funding": 0.0,
-      "volume_24h": 97325124.4585
+      "oi": 196698049.0,
+      "funding": 0.00105637,
+      "volume_24h": 29267999.64753,
+      "social_heat": "未知",
+      "twitter_followers": 0
     }
   ]
 }

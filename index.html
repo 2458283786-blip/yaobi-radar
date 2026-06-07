@@ -125,7 +125,7 @@ function renderScan(){
       h+='<div class="ano"><span class="at">'+(AL[a.type]||a.type)+'</span><span>'+a.detail+'</span><span class="av">'+a.score+'分</span></div>';
     });
     if(c.warnings&&c.warnings.length) h+='<div class="warn">风险: '+c.warnings.join(', ')+'</div>';
-    h+='</div>';
+    var sh=c.social_heat||'?';var sc=sh.indexOf('??')>=0||sh.indexOf('?')>=0?'fn':'fp';h+='<div class="crow"><span>??: <span class="'+sc+'">'+sh+'</span></span></div>';h+='</div>';
   });
   document.getElementById('main').innerHTML=h;
 

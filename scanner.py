@@ -38,6 +38,12 @@ def main():
     cg_data = collect_coingecko_market_data(symbols)
     print(f"    {len(cg_data)} coins")
 
+    # Social media attention (low = potential stealth phase)
+    print("\n[Social] Checking social attention...")
+    from src.social import get_social_data
+    social_data = get_social_data(symbols[:20])  # Top 20 only to save API calls
+    print(f"    Got social data for {len(social_data)} coins")
+
     print("\n[4] Snapshots...")
     snapshots = []
     for i, t in enumerate(tickers):
@@ -105,6 +111,8 @@ def main():
             "oi": snap.get("oi", 0),
             "funding": snap.get("funding", 0),
             "volume_24h": snap.get("volume_24h", 0),
+            "social_heat": social_data.get(r["symbol"], {}).get("social_heat", "未知"),
+            "twitter_followers": social_data.get(r["symbol"], {}).get("twitter_followers", 0),
         })
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
@@ -135,16 +143,15 @@ def main():
         conn.close()
         with open("docs/backtest.json", "w", encoding="utf-8") as f:
             json.dump({"updated": today, "entries": bt}, f, ensure_ascii=False, indent=2)
-        
-    # Save history manifest
-    import glob
-    history_files = sorted(glob.glob("docs/report-*.md"), reverse=True)
-    history_list = [f.replace("\\","/").replace("docs/","").replace(".md","").replace("report-","") for f in history_files[:30]]
-    with open("docs/history.json", "w", encoding="utf-8") as f:
-        json.dump({"reports": history_list}, f)
-    with open("history.json", "w", encoding="utf-8") as f:
-        json.dump({"reports": history_list}, f)
-    print("Backtest saved")
+        # Save history manifest
+        import glob
+        history_files = sorted(glob.glob("docs/report-*.md"), reverse=True)
+        history_list = [f.replace("\\","/").replace("docs/","").replace(".md","").replace("report-","") for f in history_files[:30]]
+        with open("docs/history.json", "w", encoding="utf-8") as f:
+            json.dump({"reports": history_list}, f)
+        with open("history.json", "w", encoding="utf-8") as f:
+            json.dump({"reports": history_list}, f)
+        print("Backtest saved")
     except: pass
 
     # Save rankings for future backtest
@@ -166,4 +173,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\nError: {e}")
         import traceback; traceback.print_exc()
+
+
 

@@ -120,6 +120,66 @@
       "symbol": "CLUSDT",
       "price": 91.4,
       "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "PORTALUSDT",
+      "price": 0.01778,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "GUNUSDT",
+      "price": 0.006538,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "XLMUSDT",
+      "price": 0.20463,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "MRVLUSDT",
+      "price": 294.93,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "LABUSDT",
+      "price": 13.214,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "TONUSDT",
+      "price": 1.701,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "BSBUSDT",
+      "price": 0.29776,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "ESPORTSUSDT",
+      "price": 0.06734,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "UBUSDT",
+      "price": 0.13345,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "CLUSDT",
+      "price": 91.59,
+      "ret7d": null
     }
   ]
 }
