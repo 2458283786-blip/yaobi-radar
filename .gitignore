@@ -6,9 +6,7 @@ __pycache__/
 # Data (committed via CI, ignored locally)
 # data/
 
-# Outputs
-outputs/*.txt
-
+# Outputs (committed)\n
 # IDE
 .vscode/
 .idea/
@@ -16,3 +14,4 @@ outputs/*.txt
 # OS
 .DS_Store
 Thumbs.db
+

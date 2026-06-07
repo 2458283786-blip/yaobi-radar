@@ -114,6 +114,23 @@ def main():
             save_backtest(r["symbol"], today, price_vals[0])
     save_ranking(today, rankings)
 
+    # 8. Save readable report to outputs/
+    os.makedirs("outputs", exist_ok=True)
+    report_path = f"outputs/report-{today}.md"
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(summary)
+        f.write("\n\n## Top5 Detailed\n\n")
+        for r in results[:5]:
+            rep = generate_report(r)
+            if rep:
+                f.write(rep + "\n\n")
+    # Also write latest as index
+    with open("outputs/report.md", "w", encoding="utf-8") as f:
+        f.write(f"# Latest Scan: {today}\n\n")
+        f.write(summary)
+        f.write("\n\n[View all reports](https://github.com/2458283786-blip/yaobi-radar/tree/master/outputs)\n")
+    print(f"\nReport saved: {report_path}")
+
     print(f"\n{'='*72}")
     print(f"  Done: {len(results)} structure anomalies found")
     print(f"  Data saved to SQLite for backtest tracking")
@@ -131,4 +148,5 @@ if __name__ == "__main__":
         print(f"\nError: {e}")
         import traceback
         traceback.print_exc()
+
 
