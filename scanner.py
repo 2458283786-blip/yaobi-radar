@@ -145,6 +145,20 @@ def main():
             key=lambda x: x[1]["score"], reverse=True
         )[:3]
         json_data["candidates"].append({
+    top10 = results[:10]
+
+    # 10. AI analysis
+    from src.ai_analysis import analyze_with_ai
+    print("\n[AI] Running AI analysis...")
+    ai_result = analyze_with_ai(top10, regime)
+    if ai_result:
+        with open("outputs/ai_analysis.md", "w", encoding="utf-8") as f:
+            f.write(ai_result)
+        with open("outputs/report.md", "a", encoding="utf-8") as f:
+            f.write("\n\n" + ai_result)
+        print("AI analysis added to report")
+    else:
+        print("AI analysis skipped (set OPENAI_API_KEY to enable)")
             "rank": results.index(r) + 1,
             "symbol": r["symbol"],
             "score": r["composite_score"],
@@ -173,6 +187,8 @@ if __name__ == "__main__":
         print(f"\nError: {e}")
         import traceback
         traceback.print_exc()
+
+
 
 
 

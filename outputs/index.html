@@ -52,7 +52,11 @@ body { background:var(--bg); color:var(--text); font-family: -apple-system, Blin
     <div class="sub">Market Structure Anomaly Scanner &middot; Not price prediction</div>
     <div class="meta" id="meta"></div>
   </div>
-  <div id="content"><div class="loading">Loading data...</div></div>
+    <div id="ai-section" style="display:none; margin-top:20px; padding:20px; background:var(--card); border:1px solid var(--border); border-radius:12px;">
+    <h3 style="color:var(--purple); margin-bottom:12px;">AI Analysis</h3>
+    <div id="ai-content" style="font-size:14px; line-height:1.6; white-space:pre-wrap;"></div>
+  </div>
+<div id="content"><div class="loading">Loading data...</div></div>
   <div class="footer">
     Updated every 4 hours via GitHub Actions &middot;
     <a href="https://github.com/2458283786-blip/yaobi-radar" style="color:var(--muted)">View on GitHub</a>
@@ -113,6 +117,15 @@ function render(d) {
 }
 
 load();
-</script>
+    // Load AI analysis
+    try {
+      const aiResp = await fetch('ai_analysis.md');
+      if (aiResp.ok) {
+        const aiText = await aiResp.text();
+        document.getElementById('ai-content').textContent = aiText;
+        document.getElementById('ai-section').style.display = 'block';
+      }
+    } catch(e) {}</script>
 </body>
 </html>
+

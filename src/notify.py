@@ -70,3 +70,4 @@ if __name__ == "__main__":
     pp = send_pushplus(data)
     tg = send_telegram(data)
     print(f"PushPlus(WeChat): {'OK' if pp else 'skip'}  |  Telegram: {'OK' if tg else 'skip'}")
+
