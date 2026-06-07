@@ -1,197 +1,159 @@
 ﻿# -*- coding: utf-8 -*-
 import sys, time, os, io
-
-# Windows UTF-8 fix
 if sys.platform == "win32":
-    try:
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
-    except Exception:
-        pass
-
+    try: sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+    except: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from src.db import init_db, insert_snapshot, save_ranking, save_backtest
-from src.collector import (
-    collect_binance_futures_tickers, collect_klines,
-    collect_full_snapshot, collect_coingecko_market_data,
-)
+from src.collector import *
 from src.analyzer import detect_all_anomalies, assess_market_regime
 from src.report import generate_report, generate_summary
 from src.config import TOP_N_VOLUME, TOP_K_OUTPUT, EXCLUDE_SYMBOLS
-
-# Using EXCLUDE_SYMBOLS from config
+from datetime import datetime
+import json
 
 def main():
     print("=" * 72)
-    print("  YaoBi Radar v2.0 - Market Structure Anomaly Scanner")
-    print("  Core: Find structure changes, not predict price")
+    print("  YaoBi Radar v2.0 - Binance Futures Scanner")
+    print("  Find structure anomalies, not predict price")
     print("=" * 72)
 
-    # 0. DB
     print("\n[0] Init SQLite...")
     init_db()
     print("    Ready")
 
-    # 1. BTC benchmark
-    print("\n[1] Fetch BTC benchmark...")
+    print("\n[1] BTC benchmark...")
     btc_kl = collect_klines("BTCUSDT", "4h", 100)
     regime = assess_market_regime(btc_kl)
-    print(f"    Market Regime: {regime}")
+    print(f"    Market: {regime}")
 
-    # 2. Top 100 tickers
-    print(f"\n[2] Fetch Top{TOP_N_VOLUME} futures tickers...")
+    print(f"\n[2] Fetch Top{TOP_N_VOLUME} futures...")
     tickers = collect_binance_futures_tickers(TOP_N_VOLUME)
     tickers = [t for t in tickers if t["symbol"] not in EXCLUDE_SYMBOLS]
-    print(f"    Got {len(tickers)} contracts")
+    print(f"    {len(tickers)} contracts")
 
-    # 3. CoinGecko
-    print(f"\n[3] CoinGecko market data...")
+    print("\n[3] CoinGecko...")
     symbols = [t["symbol"] for t in tickers[:50]]
     cg_data = collect_coingecko_market_data(symbols)
-    print(f"    Got {len(cg_data)} coins data")
+    print(f"    {len(cg_data)} coins")
 
-    # 4. Snapshots
-    print(f"\n[4] Collect snapshots...")
+    print("\n[4] Snapshots...")
     snapshots = []
     for i, t in enumerate(tickers):
-        if (i+1) % 30 == 0 or i == 0:
-            print(f"    {i+1}/{len(tickers)}")
+        if (i+1) % 30 == 0 or i == 0: print(f"    {i+1}/{len(tickers)}")
         try:
             snap = collect_full_snapshot(t["symbol"], t, cg_data)
             insert_snapshot(snap)
             snapshots.append(snap)
-        except Exception:
-            continue
-    print(f"    Collected {len(snapshots)} snapshots")
+        except: continue
+    print(f"    {len(snapshots)} saved")
 
-    # 5. Anomaly detection
-    print(f"\n[5] Detect structure anomalies...")
+    print("\n[5] Anomaly detection...")
     results = []
     for i, snap in enumerate(snapshots):
-        if (i+1) % 30 == 0 or i == 0:
-            print(f"    {i+1}/{len(snapshots)}")
+        if (i+1) % 30 == 0 or i == 0: print(f"    {i+1}/{len(snapshots)}")
         try:
             kl = collect_klines(snap["symbol"], "4h", 120)
-            if not kl or len(kl) < 30:
-                continue
-            analysis = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl)
-            if analysis["composite_score"] >= 30:
-                results.append(analysis)
-        except Exception:
-            continue
+            if not kl or len(kl) < 30: continue
+            a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl)
+            if a["composite_score"] >= 30: results.append(a)
+        except: continue
 
     results.sort(key=lambda x: x["composite_score"], reverse=True)
-    results = results[:TOP_K_OUTPUT]
+    top10 = results[:TOP_K_OUTPUT]
 
-    # 6. Report
-    print(f"\n[6] Generate report...")
-    summary = generate_summary(results, regime)
+    print("\n[6] Generate report...")
+    today = datetime.now().strftime("%Y-%m-%d")
+    summary = generate_summary(top10, regime)
     print(summary)
 
-    print("\n" + "=" * 72)
-    print("  Top5 Detailed Reports")
-    print("=" * 72)
-    for r in results[:5]:
-        report = generate_report(r)
-        if report:
-            print("\n" + report)
-
-    # 7. Save rankings for backtest
-    from datetime import datetime
-    today = datetime.now().strftime("%Y-%m-%d")
-    rankings = []
-    for i, r in enumerate(results):
-        rankings.append({
-            "rank": i+1,
-            "symbol": r["symbol"],
-            "score": r["composite_score"],
-            "signals_str": "|".join(
-                [f"{k}:{v['score']}" for k,v in r["anomalies"].items() if v["score"]>=30]
-            )
-        })
-        price_vals = [s["price"] for s in snapshots if s["symbol"]==r["symbol"]]
-        if price_vals:
-            save_backtest(r["symbol"], today, price_vals[0])
-    save_ranking(today, rankings)
-
-    # 8. Save readable report to docs/
-    os.makedirs("outputs", exist_ok=True)
-    report_path = f"docs/report-{today}.md"
-    with open(report_path, "w", encoding="utf-8") as f:
+    # Save markdown report
+    os.makedirs("docs", exist_ok=True)
+    with open(f"docs/report-{today}.md", "w", encoding="utf-8") as f:
         f.write(summary)
-        f.write("\n\n## Top5 Detailed\n\n")
-        for r in results[:5]:
+        f.write("\n\n## Detailed\n\n")
+        for r in top10[:5]:
             rep = generate_report(r)
-            if rep:
-                f.write(rep + "\n\n")
-    # Also write latest as index
+            if rep: f.write(rep + "\n\n")
     with open("docs/report.md", "w", encoding="utf-8") as f:
-        f.write(f"# Latest Scan: {today}\n\n")
-        f.write(summary)
-        f.write("\n\n[View all reports](https://github.com/2458283786-blip/yaobi-radar/tree/master/outputs)\n")
-    
-    # 9. Save JSON for web/telegram
-    import json
+        f.write(f"# Latest: {today}\n\n{summary}")
+
+    # Save JSON (with contract data - NO duplicates)
     json_data = {
         "updated": datetime.now().isoformat(),
         "regime": regime,
         "total_scanned": len(snapshots),
         "candidates": []
     }
-    for r in results[:10]:
+    seen = set()
+    for r in top10:
+        if r["symbol"] in seen: continue
+        seen.add(r["symbol"])
         top_anoms = sorted(
-            [(k, {"score": v["score"], "detail": v["detail"]}) 
+            [(k, {"score": v["score"], "detail": v["detail"]})
              for k, v in r["anomalies"].items() if v["score"] >= 30],
             key=lambda x: x[1]["score"], reverse=True
         )[:3]
+        snap = next((s for s in snapshots if s["symbol"] == r["symbol"]), {})
         json_data["candidates"].append({
-    top10 = results[:10]
-
-    # 10. AI analysis
-    from src.ai_analysis import analyze_with_ai
-    print("\n[AI] Running AI analysis...")
-    ai_result = analyze_with_ai(top10, regime)
-    if ai_result:
-        with open("docs/ai_analysis.md", "w", encoding="utf-8") as f:
-            f.write(ai_result)
-        with open("docs/report.md", "a", encoding="utf-8") as f:
-            f.write("\n\n" + ai_result)
-        print("AI analysis added to report")
-    else:
-        print("AI analysis skipped (set OPENAI_API_KEY to enable)")
-            "rank": results.index(r) + 1,
+            "rank": len(json_data["candidates"]) + 1,
             "symbol": r["symbol"],
             "score": r["composite_score"],
             "anomalies": [{"type": k, "score": v["score"], "detail": v["detail"]} for k, v in top_anoms],
             "warnings": [w["pattern"] for w in r.get("failure_warnings", [])],
+            "oi": snap.get("oi", 0),
+            "funding": snap.get("funding", 0),
+            "volume_24h": snap.get("volume_24h", 0),
         })
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
-    print("JSON saved: docs/data.json")
-    print(f"\nReport saved: {report_path}")
+    print("JSON saved")
+
+    # AI analysis (optional)
+    try:
+        from src.ai_analysis import analyze_with_ai
+        print("\n[AI] Running...")
+        ai = analyze_with_ai(top10, regime)
+        if ai:
+            with open("docs/ai_analysis.md", "w", encoding="utf-8") as f: f.write(ai)
+            with open("docs/report.md", "a", encoding="utf-8") as f: f.write("\n\n" + ai)
+            print("AI analysis added")
+    except Exception as e:
+        print(f"AI skipped: {e}")
+
+    # Backtest
+    try:
+        import sqlite3
+        conn = sqlite3.connect("data/market.db")
+        rows = conn.execute("""
+            SELECT snapshot_date, symbol, price_at_snapshot, return_7d
+            FROM backtest_results ORDER BY snapshot_date DESC LIMIT 50
+        """).fetchall()
+        bt = [{"date": r[0], "symbol": r[1], "price": r[2],
+               "ret7d": round(r[3], 1) if r[3] is not None else None} for r in rows]
+        conn.close()
+        with open("docs/backtest.json", "w", encoding="utf-8") as f:
+            json.dump({"updated": today, "entries": bt}, f, ensure_ascii=False, indent=2)
+        print("Backtest saved")
+    except: pass
+
+    # Save rankings for future backtest
+    rankings = []
+    for i, r in enumerate(top10):
+        rankings.append({"rank": i+1, "symbol": r["symbol"], "score": r["composite_score"],
+                         "signals_str": "|".join([f"{k}:{v['score']}" for k,v in r["anomalies"].items() if v["score"]>=30])})
+        p = next((s["price"] for s in snapshots if s["symbol"]==r["symbol"]), 0)
+        if p: save_backtest(r["symbol"], today, p)
+    save_ranking(today, rankings)
 
     print(f"\n{'='*72}")
-    print(f"  Done: {len(results)} structure anomalies found")
-    print(f"  Data saved to SQLite for backtest tracking")
+    print(f"  Done: {len(top10)} anomalies | DB updated | Docs generated")
     print(f"{'='*72}")
-    print(f"  [WARNING] Describes structure anomalies only. Not investment advice.")
-    print(f"{'='*72}")
-
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\n\nCancelled")
+    try: main()
+    except KeyboardInterrupt: print("\nCancelled")
     except Exception as e:
         print(f"\nError: {e}")
-        import traceback
-        traceback.print_exc()
-
-
-
-
-
-
-
-
+        import traceback; traceback.print_exc()
