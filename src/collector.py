@@ -4,6 +4,7 @@ import requests
 from src.config import *
 
 def _get(url: str, retries: int = 3):
+    """通用 GET 请求"""
     for i in range(retries):
         try:
             r = requests.get(url, timeout=15, proxies=PROXIES)
@@ -14,9 +15,23 @@ def _get(url: str, retries: int = 3):
                 time.sleep(1)
     return {} if "[" not in url[:50] else []
 
+def _get_binance(path: str, retries: int = 2):
+    """Binance 专用 GET: 自动尝试所有备用端点"""
+    for base in BINANCE_FUTURES_BASES:
+        url = f"{base}{path}"
+        for i in range(retries):
+            try:
+                r = requests.get(url, timeout=15, proxies=PROXIES)
+                r.raise_for_status()
+                return r.json()
+            except Exception:
+                if i < retries - 1:
+                    time.sleep(1)
+    return {} if "[" not in path[:50] else []
+
 def collect_binance_futures_tickers(top_n: int = TOP_N_VOLUME) -> list:
     """获取合约24h行情，取成交量TopN"""
-    data = _get(f"{BINANCE_FUTURES}/fapi/v1/ticker/24hr")
+    data = _get_binance("/fapi/v1/ticker/24hr")
     if not data:
         return []
     usdt = [t for t in data if t["symbol"].endswith("USDT")]
@@ -25,19 +40,19 @@ def collect_binance_futures_tickers(top_n: int = TOP_N_VOLUME) -> list:
 
 def collect_oi(symbol: str) -> float:
     """获取当前OI"""
-    data = _get(f"{BINANCE_FUTURES}/fapi/v1/openInterest?symbol={symbol}")
+    data = _get_binance(f"/fapi/v1/openInterest?symbol={symbol}")
     return float(data.get("openInterest", 0))
 
 def collect_funding(symbol: str) -> float:
     """获取最新资金费率"""
-    data = _get(f"{BINANCE_FUTURES}/fapi/v1/fundingRate?symbol={symbol}&limit=1")
+    data = _get_binance(f"/fapi/v1/fundingRate?symbol={symbol}&limit=1")
     if data and len(data) > 0:
         return float(data[0]["fundingRate"])
     return 0.0
 
 def collect_klines(symbol: str, interval: str = "4h", limit: int = 200) -> list:
     """获取合约K线"""
-    return _get(f"{BINANCE_FUTURES}/fapi/v1/klines?symbol={symbol}&interval={interval}&limit={limit}")
+    return _get_binance(f"/fapi/v1/klines?symbol={symbol}&interval={interval}&limit={limit}")
 
 def collect_coingecko_market_data(symbols: list) -> dict:
     """

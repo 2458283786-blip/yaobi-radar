@@ -33,6 +33,15 @@ def main():
     tickers = collect_binance_futures_tickers(TOP_N_VOLUME)
     tickers = [t for t in tickers if t["symbol"] not in EXCLUDE_SYMBOLS]
     print(f"    {len(tickers)} contracts")
+    if not tickers:
+        print("    [DEBUG] All Binance endpoints failed! Trying direct ping...")
+        import requests
+        for b in ["https://fapi.binance.com", "https://fapi1.binance.com", "https://fapi2.binance.com", "https://fapi3.binance.com"]:
+            try:
+                r = requests.get(b + "/fapi/v1/ping", timeout=10)
+                print(f"    [DEBUG] {b}: HTTP {r.status_code}")
+            except Exception as e:
+                print(f"    [DEBUG] {b}: {e}")
 
     print("\n[3] CoinGecko...")
     symbols = [t["symbol"] for t in tickers[:50]]

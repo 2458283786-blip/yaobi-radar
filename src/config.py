@@ -3,6 +3,12 @@ import os
 
 BINANCE_SPOT = "https://api.binance.com"
 BINANCE_FUTURES = "https://fapi.binance.com"
+BINANCE_FUTURES_BASES = [
+    "https://fapi.binance.com",
+    "https://fapi1.binance.com",
+    "https://fapi2.binance.com",  
+    "https://fapi3.binance.com",
+]
 COINGECKO = "https://api.coingecko.com/api/v3"
 
 # 代理: 环境变量 PROXY_URL 优先, 否则用默认值, 都不设则不使用代理
