@@ -16,7 +16,12 @@ BINANCE_RELAY = "https://binance-relay.2458283786.workers.dev"
 PROXY = os.environ.get("PROXY_URL", "http://127.0.0.1:65532")
 PROXIES = {"http": PROXY, "https": PROXY}
 # GitHub Actions 环境下不设代理
-if os.environ.get("CI") or os.environ.get("GITHUB_ACTIONS"):
+
+# Override via env var (used by GitHub Actions)
+if os.environ.get("BINANCE_BASE_URL"):
+    BINANCE_FUTURES = os.environ["BINANCE_BASE_URL"]
+    BINANCE_FUTURES_BASES = [os.environ["BINANCE_BASE_URL"]]
+
     PROXIES = None
 
 SCAN_INTERVAL = "4h"
