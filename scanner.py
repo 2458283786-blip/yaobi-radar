@@ -228,7 +228,6 @@ def main():
     for i, r in enumerate(top10):
         rankings.append({"rank": i+1, "symbol": r["symbol"], "score": r["composite_score"],
                          "signals_str": "|".join([f"{k}:{v['score']}" for k,v in r["anomalies"].items() if v["score"]>=30])})
-        p = next((s["price"] for s in snapshots if s["symbol"]==r["symbol"]), 0)
     save_ranking(today, rankings)
 
     print(f"\n{'='*72}")

@@ -1,5 +1,5 @@
-﻿# social.py - 社交媒体热度检测 (轻量版, 避免CoinGecko限流)
-import requests, time
+﻿# social.py - 社交媒体热度检测 (基于市值+Tredning, 避免CoinGecko限流)
+import requests
 from src.config import PROXIES, COINGECKO
 
 def get_trending_coins() -> set:
@@ -18,46 +18,38 @@ def get_trending_coins() -> set:
 
 def estimate_social_heat(symbol: str, market_cap: float, trending_set: set) -> dict:
     """
-    基于可用数据估算社交热度 (不依赖CoinGecko社区API)
+    基于市值估算社交热度
     
-    判断逻辑:
-    - 市值 < 100M + 不在Trending = 微型币埋伏期 (最高分)
-    - 市值 < 500M + 不在Trending = 小币种埋伏期
-    - 市值 > 1B = 已被市场发现
-    - 在Trending榜单 = 正在获得关注
+    逻辑:
+    - 微型币(<5000万) + 不在Trending = 极致埋伏期
+    - 无市值数据 + 不在Trending = 低关注埋伏期  
+    - 在Trending = 正在获得关注
+    - 大市值 = 已被充分发现
     """
-    base = symbol.replace("USDT", "")
     in_trending = symbol in trending_set
-    
+
     if not market_cap or market_cap <= 0:
-        heat = "未知"
-        heat_score = 10
-        stealth = False
+        if in_trending:
+            heat, heat_score, stealth = "Trending新币", 50, False
+        else:
+            heat, heat_score, stealth = "低关注", 40, True
     elif market_cap < 50_000_000:
-        heat = "微型币"
-        heat_score = 90
+        heat, heat_score = "微型币", 90
         stealth = not in_trending
     elif market_cap < 200_000_000:
-        heat = "小市值"
-        heat_score = 70
+        heat, heat_score = "小市值", 70
         stealth = not in_trending
     elif market_cap < 1_000_000_000:
-        heat = "中市值"
-        heat_score = 40
-        stealth = False
+        heat, heat_score, stealth = "中市值", 45, False
     elif market_cap < 10_000_000_000:
-        heat = "大市值"
-        heat_score = 20
-        stealth = False
+        heat, heat_score, stealth = "大市值", 20, False
     else:
-        heat = "巨鲸"
-        heat_score = 5
-        stealth = False
-    
+        heat, heat_score, stealth = "巨鲸", 5, False
+
     if in_trending:
         heat += " +Trending"
-        heat_score += 10
-    
+        heat_score = min(100, heat_score + 10)
+
     return {
         "social_heat": heat,
         "heat_score": heat_score,
@@ -65,29 +57,23 @@ def estimate_social_heat(symbol: str, market_cap: float, trending_set: set) -> d
         "stealth_phase": stealth,
         "twitter_followers": 0,
         "reddit_subscribers": 0,
+        "trending_score": 1 if in_trending else 0,
         "market_cap": market_cap,
     }
 
 def get_social_data(symbols: list) -> dict:
-    """
-    获取社交媒体综合数据 (轻量版)
-    """
-    # 1. 获取Trending (仅1次请求)
+    """获取社交媒体综合数据 (轻量版, 仅市值估算)"""
     trending = get_trending_coins()
-    
-    # 2. 从market_data获取市值已经在scanner里有了, 这里简化
     results = {}
     for sym in symbols:
-        # 默认值 - 实际市值由scanner传入
         results[sym] = {
             "symbol": sym,
             "social_heat": "待采集",
             "heat_score": 0,
-            "twitter_followers": 0,
-            "reddit_subscribers": 0,
             "is_trending": sym in trending,
             "trending_score": 1 if sym in trending else 0,
             "stealth_phase": False,
+            "twitter_followers": 0,
+            "reddit_subscribers": 0,
         }
-    
     return results

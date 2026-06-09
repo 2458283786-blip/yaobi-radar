@@ -468,6 +468,10 @@ def detect_all_anomalies(symbol: str, ticker: dict, klines: list,
         persist["score"] * 0.1
     )
 
+    # Stealth bonus: low social attention + strong structure = higher potential
+    if social_data and social_data.get("stealth_phase"):
+        composite += 5  # Bonus for being undiscovered
+
     market_regime = assess_market_regime(btc_klines)
 
     # 失败模式匹配
