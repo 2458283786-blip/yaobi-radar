@@ -58,14 +58,23 @@ def main():
             snapshots.append(snap)
         except: continue
     print(f"    {len(snapshots)} saved")
+    if snapshots:
+        sample = snapshots[0]
+        has_oi = sample.get("oi", 0) > 0
+        has_fr = sample.get("funding") is not None
+        print(f"    Sample data check - OI:{has_oi} Funding:{has_fr}")
 
     print("\n[5] Anomaly detection...")
     results = []
+    kline_ok = 0
+    kline_fail = 0
     for i, snap in enumerate(snapshots):
         if (i+1) % 30 == 0 or i == 0: print(f"    {i+1}/{len(snapshots)}")
         try:
             kl = collect_klines(snap["symbol"], "4h", 120)
-            if not kl or len(kl) < 30: continue
+            if not kl or len(kl) < 30:
+                if i == 0: print(f"    [DEBUG] First kline failed: {snap['symbol']}")
+                continue
             a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl)
             if a["composite_score"] >= 20: results.append(a)
             try:
@@ -77,6 +86,7 @@ def main():
 
     crash_results = []
 
+    print(f"    Klines: {kline_ok} ok / {kline_fail} failed")
     print(f"    Raw anomalies detected: {len(results)}")
     results.sort(key=lambda x: x["composite_score"], reverse=True)
     top10 = results[:TOP_K_OUTPUT]
