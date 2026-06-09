@@ -1,6 +1,5 @@
 ﻿# crash_detector.py - 暴跌风险预警
 import numpy as np
-from src.db import get_history
 from src.config import FAILURE_CASES
 
 def detect_crash_risks(symbol: str, klines: list, ticker: dict) -> dict:

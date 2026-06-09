@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-07",
+  "updated": "2026-06-09",
   "entries": [
     {
       "date": "2026-06-07",
@@ -239,6 +239,66 @@
       "date": "2026-06-07",
       "symbol": "ESPORTSUSDT",
       "price": 0.06775,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "PORTALUSDT",
+      "price": 0.01757,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "GUNUSDT",
+      "price": 0.006549,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "XLMUSDT",
+      "price": 0.20367,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "MRVLUSDT",
+      "price": 289.04,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "LABUSDT",
+      "price": 12.931,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "HUSDT",
+      "price": 0.78646,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "TONUSDT",
+      "price": 1.6943,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "BSBUSDT",
+      "price": 0.32378,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "VELVETUSDT",
+      "price": 0.2242,
+      "ret7d": null
+    },
+    {
+      "date": "2026-06-07",
+      "symbol": "PARTIUSDT",
+      "price": 0.05727,
       "ret7d": null
     }
   ]

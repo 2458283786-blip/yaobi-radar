@@ -42,8 +42,11 @@ def main():
     # Social media attention (low = potential stealth phase)
     print("\n[Social] Checking social attention...")
     from src.social import get_social_data
-    social_data = get_social_data(symbols[:20])  # Top 20 only to save API calls
-    print(f"    Got social data for {len(social_data)} coins")
+    try:
+        social_data = get_social_data(symbols[:20])
+    except Exception:
+        social_data = {}  # Top 20 only to save API calls
+        print(f"    Got social data for {len(social_data)} coins")
 
     print("\n[4] Snapshots...")
     snapshots = []
@@ -65,8 +68,11 @@ def main():
             if not kl or len(kl) < 30: continue
             a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl)
             if a["composite_score"] >= 30: results.append(a)
-            crash = detect_crash_risks(snap["symbol"], kl, snap)
-            if crash["score"] >= 20: crash_results.append({"symbol": snap["symbol"], **crash})
+            try:
+                crash = detect_crash_risks(snap["symbol"], kl, snap)
+                if crash["score"] >= 20: crash_results.append({"symbol": snap["symbol"], **crash})
+            except Exception as ce:
+                pass  # crash detection is non-critical
         except: continue
 
     crash_results = []
