@@ -29,6 +29,29 @@ def _get_binance(path: str, retries: int = 2):
                 r.raise_for_status()
                 data = r.json()
                 if "/ticker/24hr" in path and not isinstance(data, list):
+                    print(f"    [DEBUG] {base}: got non-list response, skipping")
+                    continue
+                print(f"    [DEBUG] OK via {base}")
+                return data
+            except Exception as e:
+                if i == 0 and base == bases[0]:
+                    print(f"    [DEBUG] {base}: {e}")
+                if i < retries - 1:
+                    time.sleep(1)
+    return {} if "[" not in path[:50] else []
+    """Binance GET: auto-try all endpoints including relay"""
+    if os.environ.get("GITHUB_ACTIONS"):
+        bases = [BINANCE_RELAY] + BINANCE_FUTURES_BASES
+    else:
+        bases = BINANCE_FUTURES_BASES + [BINANCE_RELAY]
+    for base in bases:
+        url = f"{base}{path}"
+        for i in range(retries):
+            try:
+                r = requests.get(url, timeout=15, proxies=PROXIES)
+                r.raise_for_status()
+                data = r.json()
+                if "/ticker/24hr" in path and not isinstance(data, list):
                     continue
                 return data
             except Exception:
