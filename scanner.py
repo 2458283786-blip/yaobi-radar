@@ -144,6 +144,9 @@ def main():
             "crash_warnings": [w["type"] for w in next((cr["warnings"] for cr in crash_results if cr["symbol"] == r["symbol"]), [])],
             "social_heat": social_data.get(r["symbol"], {}).get("social_heat", "未知"),
             "twitter_followers": social_data.get(r["symbol"], {}).get("twitter_followers", 0),
+            "stealth_phase": social_data.get(r["symbol"], {}).get("stealth_phase", False),
+            "trending_score": social_data.get(r["symbol"], {}).get("trending_score", 0),
+            "reddit_subscribers": social_data.get(r["symbol"], {}).get("reddit_subscribers", 0),
         })
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
