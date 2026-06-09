@@ -17,7 +17,7 @@ def _get(url: str, retries: int = 3):
 
 def _get_binance(path: str, retries: int = 2):
     """Binance 专用 GET: 自动尝试所有备用端点"""
-    for base in BINANCE_FUTURES_BASES:
+    for base in BINANCE_FUTURES_BASES + [BINANCE_RELAY]:
         url = f"{base}{path}"
         for i in range(retries):
             try:

@@ -9,7 +9,8 @@ BINANCE_FUTURES_BASES = [
     "https://fapi2.binance.com",  
     "https://fapi3.binance.com",
 ]
-COINGECKO = "https://api.coingecko.com/api/v3"
+BINANCE_RELAY = "https://binance-relay.2458283786.workers.dev"
+
 
 # 代理: 环境变量 PROXY_URL 优先, 否则用默认值, 都不设则不使用代理
 PROXY = os.environ.get("PROXY_URL", "http://127.0.0.1:65532")
