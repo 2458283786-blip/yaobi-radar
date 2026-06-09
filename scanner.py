@@ -67,7 +67,7 @@ def main():
             kl = collect_klines(snap["symbol"], "4h", 120)
             if not kl or len(kl) < 30: continue
             a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl)
-            if a["composite_score"] >= 30: results.append(a)
+            if a["composite_score"] >= 20: results.append(a)
             try:
                 crash = detect_crash_risks(snap["symbol"], kl, snap)
                 if crash["score"] >= 20: crash_results.append({"symbol": snap["symbol"], **crash})
@@ -77,6 +77,7 @@ def main():
 
     crash_results = []
 
+    print(f"    Raw anomalies detected: {len(results)}")
     results.sort(key=lambda x: x["composite_score"], reverse=True)
     top10 = results[:TOP_K_OUTPUT]
 
