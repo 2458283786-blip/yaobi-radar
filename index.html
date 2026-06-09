@@ -173,29 +173,28 @@ function renderScan() {
 
 async function renderHistory() {
   document.getElementById('meta').innerHTML = '';
-  // Fetch list of report files from GitHub API
   try {
-    const r = await fetch('https://api.github.com/repos/2458283786-blip/yaobi-radar/contents/docs?ref=master');
-    const files = await r.json();
-    const reports = files
-      .filter(f => f.name.startsWith('report-') && f.name.endsWith('.md'))
-      .sort((a,b) => b.name.localeCompare(a.name));
+    const r = await fetch('history.json?v=' + Date.now());
+    const d = await r.json();
+    const reports = d.reports || [];
 
     if (!reports.length) {
-      document.getElementById('content').innerHTML = '<div class="empty">No historical reports yet. Check back after a few scan cycles.</div>';
+      document.getElementById('content').innerHTML = '<div class="empty">?????????????...</div>';
       return;
     }
 
     let html = '';
-    reports.forEach(f => {
-      const date = f.name.replace('report-','').replace('.md','');
+    reports.forEach(date => {
       html += `<div class="history-item">
         <span class="history-date">${date}</span>
-        <a class="history-link" href="${f.download_url}" target="_blank">View Report</a>
+        <a class="history-link" href="docs/report-${date}.md" target="_blank">????</a>
       </div>`;
     });
     document.getElementById('content').innerHTML = html;
   } catch(e) {
+    document.getElementById('content').innerHTML = '<div class="error">??????????</div>';
+  }
+} catch(e) {
     document.getElementById('content').innerHTML = '<div class="error">Failed to load history. <a href="https://github.com/2458283786-blip/yaobi-radar/tree/master/docs" style="color:var(--accent)">View on GitHub</a></div>';
   }
 }
