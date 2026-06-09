@@ -1,5 +1,5 @@
 ﻿# collector.py - 数据采集 (Binance + CoinGecko)
-import sys, time
+import sys, time, os
 import requests
 from src.config import *
 
@@ -16,14 +16,21 @@ def _get(url: str, retries: int = 3):
     return {} if "[" not in url[:50] else []
 
 def _get_binance(path: str, retries: int = 2):
-    """Binance 专用 GET: 自动尝试所有备用端点"""
-    for base in BINANCE_FUTURES_BASES + [BINANCE_RELAY]:
+    """Binance GET: auto-try all endpoints including relay"""
+    if os.environ.get("GITHUB_ACTIONS"):
+        bases = [BINANCE_RELAY] + BINANCE_FUTURES_BASES
+    else:
+        bases = BINANCE_FUTURES_BASES + [BINANCE_RELAY]
+    for base in bases:
         url = f"{base}{path}"
         for i in range(retries):
             try:
                 r = requests.get(url, timeout=15, proxies=PROXIES)
                 r.raise_for_status()
-                return r.json()
+                data = r.json()
+                if "/ticker/24hr" in path and not isinstance(data, list):
+                    continue
+                return data
             except Exception:
                 if i < retries - 1:
                     time.sleep(1)
