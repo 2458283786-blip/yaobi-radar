@@ -1,139 +1,93 @@
-﻿# social.py - 社交媒体热度 & 趋势检测
-import os, time, requests, json
+﻿# social.py - 社交媒体热度检测 (轻量版, 避免CoinGecko限流)
+import requests, time
 from src.config import PROXIES, COINGECKO
 
-def _get_cg(path: str):
-    """CoinGecko API wrapper"""
+def get_trending_coins() -> set:
+    """获取CoinGecko Trending (仅1次API调用)"""
     try:
-        r = requests.get(f"{COINGECKO}{path}", proxies=PROXIES, timeout=15)
+        r = requests.get(f"{COINGECKO}/search/trending", proxies=PROXIES, timeout=15)
         r.raise_for_status()
-        return r.json()
+        data = r.json()
+        symbols = set()
+        for c in data.get("coins", []):
+            sym = (c["item"].get("symbol") or "").upper()
+            symbols.add(sym + "USDT")
+        return symbols
     except:
-        return None
+        return set()
 
-def get_trending_coins() -> dict:
-    """获取CoinGecko Trending (15个当前热门币)"""
-    data = _get_cg("/search/trending")
-    if not data:
-        return {}
-    result = {}
-    for c in data.get("coins", []):
-        item = c["item"]
-        symbol = (item.get("symbol") or "").upper() + "USDT"
-        result[symbol] = {
-            "trending_rank": item.get("market_cap_rank", 0),
-            "trending_score": item.get("score", 0),
-            "cg_id": item.get("id", ""),
-        }
-    return result
-
-def get_community_data(cg_ids: list) -> dict:
-    """批量获取社区数据 (Twitter/Reddit/Telegram)"""
-    results = {}
-    for cg_id in cg_ids:
-        try:
-            detail = _get_cg(
-                f"/coins/{cg_id}?"
-                "localization=false&tickers=false"
-                "&community_data=true&developer_data=false"
-            )
-            if detail and "community_data" in detail:
-                cd = detail["community_data"]
-                results[cg_id] = {
-                    "twitter_followers": cd.get("twitter_followers", 0) or 0,
-                    "reddit_subscribers": cd.get("reddit_subscribers", 0) or 0,
-                    "reddit_avg_posts_48h": cd.get("reddit_average_posts_48h", 0) or 0,
-                    "reddit_active_accounts": cd.get("reddit_accounts_active_48h", 0) or 0,
-                    "telegram_channel_count": cd.get("telegram_channel_user_count", 0) or 0,
-                }
-        except:
-            continue
-        time.sleep(0.6)
-    return results
-
-def classify_social_heat(followers: int, reddit_subs: int) -> dict:
-    """分类社交热度等级"""
-    total = followers + reddit_subs
-    if total > 1000000:
-        return {"level": "超高热度", "score": 5, "risk": "主力出货风险"}
-    elif total > 100000:
-        return {"level": "高热", "score": 15, "risk": "市场已充分关注"}
-    elif total > 10000:
-        return {"level": "中等", "score": 30, "risk": ""}
-    elif total > 1000:
-        return {"level": "低关注", "score": 50, "risk": "潜在埋伏机会"}
+def estimate_social_heat(symbol: str, market_cap: float, trending_set: set) -> dict:
+    """
+    基于可用数据估算社交热度 (不依赖CoinGecko社区API)
+    
+    判断逻辑:
+    - 市值 < 100M + 不在Trending = 微型币埋伏期 (最高分)
+    - 市值 < 500M + 不在Trending = 小币种埋伏期
+    - 市值 > 1B = 已被市场发现
+    - 在Trending榜单 = 正在获得关注
+    """
+    base = symbol.replace("USDT", "")
+    in_trending = symbol in trending_set
+    
+    if not market_cap or market_cap <= 0:
+        heat = "未知"
+        heat_score = 10
+        stealth = False
+    elif market_cap < 50_000_000:
+        heat = "微型币"
+        heat_score = 90
+        stealth = not in_trending
+    elif market_cap < 200_000_000:
+        heat = "小市值"
+        heat_score = 70
+        stealth = not in_trending
+    elif market_cap < 1_000_000_000:
+        heat = "中市值"
+        heat_score = 40
+        stealth = False
+    elif market_cap < 10_000_000_000:
+        heat = "大市值"
+        heat_score = 20
+        stealth = False
     else:
-        return {"level": "极低关注(埋伏期)", "score": 80, "risk": "尚未被市场发现"}
+        heat = "巨鲸"
+        heat_score = 5
+        stealth = False
+    
+    if in_trending:
+        heat += " +Trending"
+        heat_score += 10
+    
+    return {
+        "social_heat": heat,
+        "heat_score": heat_score,
+        "is_trending": in_trending,
+        "stealth_phase": stealth,
+        "twitter_followers": 0,
+        "reddit_subscribers": 0,
+        "market_cap": market_cap,
+    }
 
 def get_social_data(symbols: list) -> dict:
     """
-    获取社交媒体综合数据
-    返回: {symbol: {social_heat, twitter_followers, reddit_subs, trending, ...}}
+    获取社交媒体综合数据 (轻量版)
     """
-    # 1. 获取 Trending
+    # 1. 获取Trending (仅1次请求)
     trending = get_trending_coins()
     
-    # 2. 获取所有币的 ID 映射
-    coin_list = _get_cg("/coins/list")
-    if not coin_list or not isinstance(coin_list, list):
-        return {}
-    
-    id_map = {}
-    for c in coin_list:
-        id_map[c["symbol"].lower()] = c["id"]
-    
-    # 3. 收集需要查询的 CG ID (最多30个)
-    target_ids = set()
-    symbol_id_map = {}
-    for sym in symbols[:50]:
-        base = sym.replace("USDT", "").lower()
-        cg_id = id_map.get(base)
-        if cg_id:
-            target_ids.add(cg_id)
-            symbol_id_map[cg_id] = sym
-    
-    # 4. 批量获取社区数据
-    community = get_community_data(list(target_ids))
-    
-    # 5. 组装结果
+    # 2. 从market_data获取市值已经在scanner里有了, 这里简化
     results = {}
     for sym in symbols:
-        base = sym.replace("USDT", "").lower()
-        cg_id = id_map.get(base)
-        
-        entry = {
+        # 默认值 - 实际市值由scanner传入
+        results[sym] = {
             "symbol": sym,
-            "social_heat": "未知",
+            "social_heat": "待采集",
             "heat_score": 0,
             "twitter_followers": 0,
             "reddit_subscribers": 0,
-            "is_trending": False,
-            "trending_score": 0,
+            "is_trending": sym in trending,
+            "trending_score": 1 if sym in trending else 0,
             "stealth_phase": False,
         }
-        
-        # Trending 数据
-        if sym in trending:
-            entry["is_trending"] = True
-            entry["trending_score"] = trending[sym]["trending_score"]
-        
-        # 社区数据
-        if cg_id and cg_id in community:
-            cd = community[cg_id]
-            entry["twitter_followers"] = cd["twitter_followers"]
-            entry["reddit_subscribers"] = cd["reddit_subscribers"]
-            entry["reddit_active_48h"] = cd["reddit_active_accounts"]
-            entry["telegram_users"] = cd["telegram_channel_count"]
-            
-            heat = classify_social_heat(cd["twitter_followers"], cd["reddit_subscribers"])
-            entry["social_heat"] = heat["level"]
-            entry["heat_score"] = heat["score"]
-            entry["heat_risk"] = heat["risk"]
-            
-            # Stealth phase: low followers + not trending = 埋伏期
-            if heat["score"] >= 50 and not entry["is_trending"]:
-                entry["stealth_phase"] = True
-        
-        results[sym] = entry
     
     return results

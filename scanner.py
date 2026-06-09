@@ -38,15 +38,15 @@ def main():
         return
 
     print("\n[3] CoinGecko...")
-    symbols = [t["symbol"] for t in tickers[:50]]
+    symbols = [t["symbol"] for t in tickers[:30]]
     cg_data = collect_coingecko_market_data(symbols)
     print(f"    {len(cg_data)} coins")
 
     # Social media attention
     print("\n[Social] Checking social attention...")
-    from src.social import get_social_data
+    from src.social import get_social_data, get_trending_coins, estimate_social_heat
     try:
-        social_data = get_social_data(symbols[:40])
+        social_data = get_social_data(symbols[:25])
         print(f"    Got social data for {len(social_data)} coins")
     except Exception:
         social_data = {}
@@ -62,6 +62,20 @@ def main():
             snapshots.append(snap)
         except: continue
     print(f"    {len(snapshots)} saved")
+
+    # Enrich social data with actual market cap
+    try:
+        trending_set = get_trending_coins()
+    except:
+        trending_set = set()
+    for snap in snapshots:
+        sym = snap["symbol"]
+        if sym in social_data:
+            mc = snap.get("market_cap") or 0
+            social_data[sym] = estimate_social_heat(sym, mc, trending_set)
+        elif sym not in social_data:
+            mc = snap.get("market_cap") or 0
+            social_data[sym] = estimate_social_heat(sym, mc, trending_set)
     if snapshots:
         sample = snapshots[0]
         has_oi = sample.get("oi", 0) > 0

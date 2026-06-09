@@ -4,45 +4,37 @@
 Market Regime: **Sideways**
 Found 10 candidates with notable structure anomalies
 
-### 1. WLDUSDT - Anomaly Score: 75.5
+### 1. WLDUSDT - Anomaly Score: 69.0
   - Vol Compr: 波动率极度压缩(带宽31.2%, 分位7%)
-  - Rel Strength: 相对强度显著(+14.7% vs BTC): 独立走强
+  - Rel Strength: 相对强度偏强(+8.7% vs BTC)
 
-### 2. BTWUSDT - Anomaly Score: 67.5
-  - Rel Strength: 相对强度显著(+15.5% vs BTC): 独立走强
-  - OI Accel: OI温和加速(+8%): 资金开始流入
+### 2. XAUUSDT - Anomaly Score: 61.0
+  - social_momentum: ???: 微型币 + ??Trending?? ? ???????
+  - Vol Compr: 波动率偏紧(分位17%)
 
-### 3. SNDKUSDT - Anomaly Score: 64.5
-  - Rel Strength: 相对强度显著(+11.0% vs BTC): 独立走强
-  - Vol Expand: 成交量温和扩张(连续3期)
+### 3. TONUSDT - Anomaly Score: 59.0
+  - Vol Compr: 波动率极度压缩(带宽16.6%, 分位3%)
 
-### 4. SOXLUSDT - Anomaly Score: 61.0
-  - Rel Strength: 相对强度显著(+10.5% vs BTC): 独立走强
-  - Vol Expand: 成交量略有扩张(+11%)
+### 4. AVAXUSDT - Anomaly Score: 58.0
+  - Vol Compr: 波动率极度压缩(带宽4.3%, 分位3%)
 
-### 5. EWYUSDT - Anomaly Score: 61.0
-  - OI Accel: OI温和加速(+15%): 资金开始流入
-  - Rel Strength: 相对强度偏强(+5.3% vs BTC)
+### 5. MUUSDT - Anomaly Score: 55.5
+  - social_momentum: ???: 微型币 + ??Trending?? ? ???????
 
-### 6. SLXUSDT - Anomaly Score: 60.5
-  - Rel Strength: 相对强度显著(+41.4% vs BTC): 独立走强
-  - OI Accel: OI温和加速(+9%): 资金开始流入
+### 6. NVDAUSDT - Anomaly Score: 55.5
+  - Vol Compr: 波动率极度压缩(带宽4.4%, 分位7%)
 
-### 7. GWEIUSDT - Anomaly Score: 60.5
-  - Rel Strength: 相对强度显著(+30.5% vs BTC): 独立走强
-  - Fund Div: 费率微背离: 价格微跌但费率上升(空头犹豫)
+### 7. 1000PEPEUSDT - Anomaly Score: 55.0
+  - Vol Compr: 波动率极度压缩(带宽9.1%, 分位7%)
 
-### 8. XLMUSDT - Anomaly Score: 59.0
-  - Vol Compr: 波动率极度压缩(带宽8.8%, 分位3%)
-  - OI Accel: OI小幅加速(+4%)
+### 8. SUIUSDT - Anomaly Score: 55.0
+  - Vol Compr: 波动率极度压缩(带宽11.1%, 分位3%)
 
-### 9. POWERUSDT - Anomaly Score: 59.0
-  - Rel Strength: 相对强度显著(+57.5% vs BTC): 独立走强
-  - OI Accel: OI小幅加速(+4%)
-  - Vol Expand: 成交量略有扩张(+18%)
+### 9. FILUSDT - Anomaly Score: 55.0
+  - Vol Compr: 波动率极度压缩(带宽11.0%, 分位3%)
 
-### 10. VVVUSDT - Anomaly Score: 59.0
-  - Vol Compr: 波动率极度压缩(带宽14.6%, 分位3%)
+### 10. LTCUSDT - Anomaly Score: 55.0
+  - Vol Compr: 波动率极度压缩(带宽5.8%, 分位3%)
 
 ---
 *Records structure anomalies only. Not investment advice.*
