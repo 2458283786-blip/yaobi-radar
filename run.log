@@ -1,0 +1,4 @@
+[2026-06-09 20:19:01] === YaoBi Radar Scan Start ===
+[2026-06-09 20:19:01] Pulling latest from GitHub...
+[2026-06-09 20:19:01] ERROR: error: cannot pull with rebase: You have unstaged changes.
+[2026-06-09 20:19:01] === Scan Failed ===
