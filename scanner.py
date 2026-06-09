@@ -46,7 +46,7 @@ def main():
     print("\n[Social] Checking social attention...")
     from src.social import get_social_data
     try:
-        social_data = get_social_data(symbols[:20])
+        social_data = get_social_data(symbols[:40])
         print(f"    Got social data for {len(social_data)} coins")
     except Exception:
         social_data = {}
@@ -81,7 +81,7 @@ def main():
                 kline_fail += 1
                 continue
             kline_ok += 1
-            a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl)
+            a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl, social_data.get(snap["symbol"]))
             if a["composite_score"] >= 20: results.append(a)
             try:
                 crash = detect_crash_risks(snap["symbol"], kl, snap)

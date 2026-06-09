@@ -400,8 +400,45 @@ def match_success_patterns(snapshot: dict, history: list) -> list:
     return matches
 
 
+
+def detect_social_momentum(social_data: dict) -> dict:
+    """
+    ??????: ???????
+    - ???: ??Trending + ??? = ???price-in
+    - ????: ????? + ?Trending = ????? (??)
+    - ????: ???? + ??Trending = ??????
+    """
+    if not social_data:
+        return {"score": 0, "detail": "?????"}
+
+    heat_score = social_data.get("heat_score", 0)
+    is_trending = social_data.get("is_trending", False)
+    stealth = social_data.get("stealth_phase", False)
+    heat_level = social_data.get("social_heat", "??")
+
+    if stealth:
+        # ???? + ?Trending = ??????
+        score = 85
+        detail = f"???: {heat_level} + ??Trending?? ? ???????"
+    elif not is_trending and heat_score >= 30:
+        score = 50
+        detail = f"?????: {heat_level} ? ????????"
+    elif is_trending and heat_score >= 50:
+        # ??Trending???? = ????????
+        score = 60
+        detail = f"????: Trending? + {heat_level} ? ?????????"
+    elif is_trending and heat_score < 30:
+        score = 30
+        detail = f"??????: {heat_level} + Trending ? ?????price-in"
+    else:
+        score = 10
+        detail = f"??????: {heat_level}"
+
+    return {"score": score, "detail": detail}
+
 def detect_all_anomalies(symbol: str, ticker: dict, klines: list,
-                         btc_klines: list = None) -> dict:
+                         btc_klines: list = None,
+                         social_data: dict = None) -> dict:
     """
     综合分析一个币的所有市场结构异常
     返回: 综合异常报告
@@ -416,9 +453,10 @@ def detect_all_anomalies(symbol: str, ticker: dict, klines: list,
     oi_mc = detect_oi_mc_divergence(history) if history else {"score": 0, "detail": "无历史"}
     rs_strength = detect_relative_strength(klines, btc_klines)
     persist = calc_persistence_score(history) if history else {"score": 0, "detail": "无历史"}
+    social_mom = detect_social_momentum(social_data)
 
     # 综合异常分: 各维度取最高分(不是求和, 是发现异常)
-    anomalies = [oi_accel, vol_exp, vol_comp, fund_div, oi_mc, rs_strength]
+    anomalies = [oi_accel, vol_exp, vol_comp, fund_div, oi_mc, rs_strength, social_mom]
     anomaly_scores = [a["score"] for a in anomalies]
     top_anomalies = sorted(anomaly_scores, reverse=True)
 
@@ -452,6 +490,7 @@ def detect_all_anomalies(symbol: str, ticker: dict, klines: list,
             "funding_divergence": fund_div,
             "oi_mc_divergence": oi_mc,
             "relative_strength": rs_strength,
+            "social_momentum": social_mom,
         },
         "persistence": persist,
         "failure_warnings": failures,

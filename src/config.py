@@ -10,6 +10,7 @@ BINANCE_FUTURES_BASES = [
     "https://fapi3.binance.com",
 ]
 BINANCE_RELAY = "https://binance-relay.2458283786.workers.dev"
+COINGECKO = "https://api.coingecko.com/api/v3"
 
 
 # 代理: 环境变量 PROXY_URL 优先, 否则用默认值, 都不设则不使用代理
@@ -22,6 +23,8 @@ if os.environ.get("BINANCE_BASE_URL"):
     BINANCE_FUTURES = os.environ["BINANCE_BASE_URL"]
     BINANCE_FUTURES_BASES = [os.environ["BINANCE_BASE_URL"]]
 
+# GitHub Actions ???????
+if os.environ.get("CI") or os.environ.get("GITHUB_ACTIONS"):
     PROXIES = None
 
 SCAN_INTERVAL = "4h"
