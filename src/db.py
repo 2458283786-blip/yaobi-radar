@@ -44,16 +44,28 @@ def init_db():
         CREATE INDEX IF NOT EXISTS idx_rank_date
             ON daily_rankings(date);
 
-        CREATE TABLE IF NOT EXISTS backtest_results (
+        CREATE TABLE IF NOT EXISTS detection_log (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             symbol TEXT NOT NULL,
-            snapshot_date TEXT NOT NULL,
-            price_at_snapshot REAL,
+            detect_date TEXT NOT NULL,
+            detect_timestamp INTEGER NOT NULL,
+            detect_price REAL,
+            anomaly_score REAL,
+            top_signals TEXT,
+            price_3d REAL,
+            return_3d REAL,
             price_7d REAL,
-            price_30d REAL,
             return_7d REAL,
-            return_30d REAL
+            price_14d REAL,
+            return_14d REAL,
+            pumped_3d INTEGER DEFAULT 0,
+            pumped_7d INTEGER DEFAULT 0,
+            pumped_14d INTEGER DEFAULT 0
         );
+        CREATE INDEX IF NOT EXISTS idx_detect_date
+            ON detection_log(detect_date);
+        CREATE INDEX IF NOT EXISTS idx_detect_symbol
+            ON detection_log(symbol, detect_date);
     """)
     conn.commit()
     conn.close()
@@ -82,7 +94,6 @@ def insert_snapshot(data: dict):
     conn.close()
 
 def get_history(symbol: str, days: int = 7) -> list:
-    """获取某币近N天的历史快照"""
     conn = get_db()
     cutoff = int(time.time()) - days * 86400
     rows = conn.execute("""
@@ -114,33 +125,122 @@ def save_ranking(date_str: str, rankings: list):
     conn.commit()
     conn.close()
 
-def save_backtest(symbol: str, date: str, price: float):
+def log_detection(symbol: str, date_str: str, timestamp: int, price: float, score: float, signals: str):
+    """记录每次上榜"""
     conn = get_db()
     conn.execute("""
-        INSERT OR IGNORE INTO backtest_results
-        (symbol, snapshot_date, price_at_snapshot)
-        VALUES (?, ?, ?)
-    """, (symbol, date, price))
+        INSERT OR IGNORE INTO detection_log
+        (symbol, detect_date, detect_timestamp, detect_price, anomaly_score, top_signals)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (symbol, date_str, timestamp, price, score, signals))
     conn.commit()
     conn.close()
 
-def update_backtest_results():
-    """回溯7日和30日收益"""
+def compute_detection_returns():
+    """计算所有已记录检测的后续收益（3d/7d/14d）"""
     conn = get_db()
+    
+    # 找到所有未计算收益的检测记录 (距今超过3天的)
     now = int(time.time())
-    conn.execute("""
-        UPDATE backtest_results SET
-            price_7d = COALESCE(price_7d, (
+    pending = conn.execute("""
+        SELECT id, symbol, detect_timestamp, detect_price FROM detection_log
+        WHERE price_3d IS NULL AND detect_timestamp <= ?
+    """, (now - 3*86400,)).fetchall()
+    
+    for row in pending:
+        det_ts = row["detect_timestamp"]
+        det_price = row["detect_price"]
+        sym = row["symbol"]
+        lid = row["id"]
+        
+        updates = {}
+        
+        # 找3天后的价格
+        for days, col_price, col_ret, col_pump in [
+            (3, "price_3d", "return_3d", "pumped_3d"),
+            (7, "price_7d", "return_7d", "pumped_7d"),
+            (14, "price_14d", "return_14d", "pumped_14d"),
+        ]:
+            target = det_ts + days * 86400
+            if target > now:
+                continue  # 还没到时间
+            
+            snap = conn.execute("""
                 SELECT price FROM market_snapshots
-                WHERE market_snapshots.symbol = backtest_results.symbol
-                AND market_snapshots.timestamp >= ?
-                ORDER BY market_snapshots.timestamp ASC LIMIT 1
-            )),
-            return_7d = CASE WHEN price_7d IS NOT NULL AND price_at_snapshot > 0
-                THEN (price_7d - price_at_snapshot) / price_at_snapshot * 100
-                ELSE NULL END
-        WHERE price_7d IS NULL
-    """, (now - 7*86400,))
+                WHERE symbol = ? AND timestamp >= ? AND timestamp <= ?
+                ORDER BY timestamp ASC LIMIT 1
+            """, (sym, target - 3600, target + 86400)).fetchone()
+            
+            if snap and snap["price"] and det_price > 0:
+                ret = (snap["price"] - det_price) / det_price * 100
+                pumped = 1 if ret > 10 else 0
+                updates[col_price] = snap["price"]
+                updates[col_ret] = round(ret, 1)
+                updates[col_pump] = pumped
+        
+        if updates:
+            sets = ", ".join(f"{k} = ?" for k in updates)
+            vals = list(updates.values()) + [lid]
+            conn.execute(f"UPDATE detection_log SET {sets} WHERE id = ?", vals)
+    
     conn.commit()
     conn.close()
 
+def get_detection_stats() -> dict:
+    """获取命中率统计"""
+    conn = get_db()
+    
+    # 总体统计
+    total = conn.execute("SELECT COUNT(*) as n FROM detection_log WHERE detect_price > 0").fetchone()["n"]
+    
+    stats = {"total_detections": total, "hit_rates": {}}
+    
+    for days, col in [("3d", "pumped_3d"), ("7d", "pumped_7d"), ("14d", "pumped_14d")]:
+        pumped = conn.execute(
+            f"SELECT COUNT(*) as n FROM detection_log WHERE {col} = 1"
+        ).fetchone()["n"]
+        eligible = conn.execute(
+            f"SELECT COUNT(*) as n FROM detection_log WHERE {col} IS NOT NULL"
+        ).fetchone()["n"]
+        if eligible > 0:
+            stats["hit_rates"][days] = {
+                "pumped": pumped,
+                "eligible": eligible,
+                "rate": round(pumped / eligible * 100, 1)
+            }
+        else:
+            stats["hit_rates"][days] = {"pumped": 0, "eligible": 0, "rate": 0}
+    
+    # 最佳命中币种
+    best = conn.execute("""
+        SELECT symbol, detect_date, anomaly_score, return_7d
+        FROM detection_log
+        WHERE return_7d IS NOT NULL
+        ORDER BY return_7d DESC LIMIT 5
+    """).fetchall()
+    stats["best_hits"] = [dict(r) for r in best]
+    
+    # 最近检测
+    recent = conn.execute("""
+        SELECT symbol, detect_date, detect_price, anomaly_score,
+               return_3d, return_7d, return_14d
+        FROM detection_log
+        ORDER BY detect_date DESC LIMIT 20
+    """).fetchall()
+    stats["recent"] = [dict(r) for r in recent]
+    
+    conn.close()
+    return stats
+
+def get_latest_backtest_entries(limit: int = 50) -> list:
+    """获取最近的回测记录（兼容旧接口）"""
+    conn = get_db()
+    rows = conn.execute("""
+        SELECT detect_date as date, symbol, detect_price as price,
+               return_3d as ret3d, return_7d as ret7d, return_14d as ret14d
+        FROM detection_log
+        WHERE detect_price > 0
+        ORDER BY detect_date DESC LIMIT ?
+    """, (limit,)).fetchall()
+    conn.close()
+    return [dict(r) for r in rows]

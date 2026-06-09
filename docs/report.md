@@ -4,50 +4,45 @@
 Market Regime: **Sideways**
 Found 10 candidates with notable structure anomalies
 
-### 1. WLDUSDT - Anomaly Score: 84.5
+### 1. WLDUSDT - Anomaly Score: 75.5
   - Vol Compr: 波动率极度压缩(带宽31.2%, 分位7%)
-  - Rel Strength: 相对强度显著(+14.4% vs BTC): 独立走强
-  - OI Accel: OI温和加速(+12%): 资金开始流入
+  - Rel Strength: 相对强度显著(+14.7% vs BTC): 独立走强
 
-### 2. BTWUSDT - Anomaly Score: 84.0
-  - OI Accel: OI加速增长(+22%): OI在近3期增速超过前3期
-  - Rel Strength: 相对强度显著(+12.3% vs BTC): 独立走强
-  - OI Ratio: OI/Vol比快速上升(+33%): 持仓相对成交量在膨胀
+### 2. BTWUSDT - Anomaly Score: 67.5
+  - Rel Strength: 相对强度显著(+15.5% vs BTC): 独立走强
+  - OI Accel: OI温和加速(+8%): 资金开始流入
 
-### 3. ALLOUSDT - Anomaly Score: 75.5
-  - Rel Strength: 相对强度显著(+45.6% vs BTC): 独立走强
-  - OI Ratio: OI/Vol比快速上升(+40%): 持仓相对成交量在膨胀
-  - OI Accel: OI温和加速(+11%): 资金开始流入
+### 3. SNDKUSDT - Anomaly Score: 64.5
+  - Rel Strength: 相对强度显著(+11.0% vs BTC): 独立走强
+  - Vol Expand: 成交量温和扩张(连续3期)
 
-### 4. LTCUSDT - Anomaly Score: 72.5
-  - Vol Compr: 波动率极度压缩(带宽5.8%, 分位3%)
-  - OI Ratio: OI/Vol比快速上升(+32%): 持仓相对成交量在膨胀
-  - OI Accel: OI小幅加速(+3%)
+### 4. SOXLUSDT - Anomaly Score: 61.0
+  - Rel Strength: 相对强度显著(+10.5% vs BTC): 独立走强
+  - Vol Expand: 成交量略有扩张(+11%)
 
-### 5. SOXLUSDT - Anomaly Score: 68.5
-  - OI Accel: OI加速增长(+46%): OI在近3期增速超过前3期
-  - Rel Strength: 相对强度偏强(+8.6% vs BTC)
-  - Vol Expand: 成交量略有扩张(+53%)
+### 5. EWYUSDT - Anomaly Score: 61.0
+  - OI Accel: OI温和加速(+15%): 资金开始流入
+  - Rel Strength: 相对强度偏强(+5.3% vs BTC)
 
-### 6. JTOUSDT - Anomaly Score: 68.5
-  - Fund Div: 费率背离: 价格-3.4%但费率从-0.023%升至0.000%(空头撤退)
-  - OI Accel: OI温和加速(+12%): 资金开始流入
-
-### 7. TONUSDT - Anomaly Score: 67.5
-  - Vol Compr: 波动率极度压缩(带宽16.6%, 分位3%)
-  - OI Accel: OI温和加速(+10%): 资金开始流入
-
-### 8. FILUSDT - Anomaly Score: 67.5
-  - Vol Compr: 波动率极度压缩(带宽11.0%, 分位3%)
+### 6. SLXUSDT - Anomaly Score: 60.5
+  - Rel Strength: 相对强度显著(+41.4% vs BTC): 独立走强
   - OI Accel: OI温和加速(+9%): 资金开始流入
 
-### 9. PENGUUSDT - Anomaly Score: 64.5
-  - OI Accel: OI加速增长(+16%): OI在近3期增速超过前3期
-  - Vol Compr: 波动率偏紧(分位20%)
+### 7. GWEIUSDT - Anomaly Score: 60.5
+  - Rel Strength: 相对强度显著(+30.5% vs BTC): 独立走强
+  - Fund Div: 费率微背离: 价格微跌但费率上升(空头犹豫)
 
-### 10. NVDAUSDT - Anomaly Score: 64.0
-  - Vol Compr: 波动率极度压缩(带宽4.4%, 分位7%)
-  - Vol Expand: 成交量略有扩张(+26%)
+### 8. XLMUSDT - Anomaly Score: 59.0
+  - Vol Compr: 波动率极度压缩(带宽8.8%, 分位3%)
+  - OI Accel: OI小幅加速(+4%)
+
+### 9. POWERUSDT - Anomaly Score: 59.0
+  - Rel Strength: 相对强度显著(+57.5% vs BTC): 独立走强
+  - OI Accel: OI小幅加速(+4%)
+  - Vol Expand: 成交量略有扩张(+18%)
+
+### 10. VVVUSDT - Anomaly Score: 59.0
+  - Vol Compr: 波动率极度压缩(带宽14.6%, 分位3%)
 
 ---
 *Records structure anomalies only. Not investment advice.*

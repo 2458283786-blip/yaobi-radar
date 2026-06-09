@@ -5,7 +5,7 @@ if sys.platform == "win32":
     except: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from src.db import init_db, insert_snapshot, save_ranking, save_backtest
+from src.db import init_db, insert_snapshot, save_ranking, log_detection, compute_detection_returns, get_detection_stats, get_latest_backtest_entries
 from src.collector import *
 from src.analyzer import detect_all_anomalies, assess_market_regime
 from src.crash_detector import detect_crash_risks
@@ -164,19 +164,40 @@ def main():
     except Exception as e:
         print(f"AI skipped: {e}")
 
-    # Backtest
+    # Detection log & backtest
     try:
-        import sqlite3
-        conn = sqlite3.connect("data/market.db")
-        rows = conn.execute("""
-            SELECT snapshot_date, symbol, price_at_snapshot, return_7d
-            FROM backtest_results ORDER BY snapshot_date DESC LIMIT 50
-        """).fetchall()
-        bt = [{"date": r[0], "symbol": r[1], "price": r[2],
-               "ret7d": round(r[3], 1) if r[3] is not None else None} for r in rows]
-        conn.close()
+        # Log detections for future backtest
+        for r in top10:
+            signals_str = "|".join([f"{k}:{v['score']}" for k,v in r["anomalies"].items() if v["score"]>=30])
+            snap = next((s for s in snapshots if s["symbol"] == r["symbol"]), {})
+            if snap.get("price"):
+                log_detection(r["symbol"], today, snap.get("timestamp", int(time.time())),
+                            snap["price"], r["composite_score"], signals_str)
+        
+        # Compute returns for past detections
+        compute_detection_returns()
+        
+        # Get stats
+        stats = get_detection_stats()
+        
+        # Save backtest JSON (compatible with old format + new stats)
+        bt_entries = get_latest_backtest_entries(50)
+        bt_data = {
+            "updated": today,
+            "entries": bt_entries,
+            "stats": {
+                "total": stats["total_detections"],
+                "hit_rate_3d": stats["hit_rates"].get("3d", {}).get("rate", 0),
+                "hit_rate_7d": stats["hit_rates"].get("7d", {}).get("rate", 0),
+                "hit_rate_14d": stats["hit_rates"].get("14d", {}).get("rate", 0),
+                "best_hits": stats.get("best_hits", []),
+                "recent": stats.get("recent", []),
+            }
+        }
         with open("docs/backtest.json", "w", encoding="utf-8") as f:
-            json.dump({"updated": today, "entries": bt}, f, ensure_ascii=False, indent=2)
+            json.dump(bt_data, f, ensure_ascii=False, indent=2)
+        
+        # History manifest
         import glob
         history_files = sorted(glob.glob("docs/report-*.md"), reverse=True)
         history_list = [f.replace("\\","/").replace("docs/","").replace(".md","").replace("report-","") for f in history_files[:30]]
@@ -185,7 +206,8 @@ def main():
         with open("history.json", "w", encoding="utf-8") as f:
             json.dump({"reports": history_list}, f)
         print("Backtest saved")
-    except: pass
+    except Exception as e:
+        print(f"Backtest skipped: {e}")
 
     # Save rankings for backtest
     rankings = []
@@ -193,7 +215,6 @@ def main():
         rankings.append({"rank": i+1, "symbol": r["symbol"], "score": r["composite_score"],
                          "signals_str": "|".join([f"{k}:{v['score']}" for k,v in r["anomalies"].items() if v["score"]>=30])})
         p = next((s["price"] for s in snapshots if s["symbol"]==r["symbol"]), 0)
-        if p: save_backtest(r["symbol"], today, p)
     save_ranking(today, rankings)
 
     print(f"\n{'='*72}")

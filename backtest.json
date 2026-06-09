@@ -3,303 +3,182 @@
   "entries": [
     {
       "date": "2026-06-09",
-      "symbol": "SPCXUSDT",
-      "price": 169.26,
-      "ret7d": null
+      "symbol": "VVVUSDT",
+      "price": 16.118,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     },
     {
       "date": "2026-06-09",
-      "symbol": "MRVLUSDT",
-      "price": 299.11,
-      "ret7d": null
+      "symbol": "POWERUSDT",
+      "price": 0.09493,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-09",
+      "symbol": "XLMUSDT",
+      "price": 0.19848,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     },
     {
       "date": "2026-06-09",
       "symbol": "GWEIUSDT",
-      "price": 0.17783,
-      "ret7d": null
+      "price": 0.17163,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     },
     {
       "date": "2026-06-09",
-      "symbol": "LABUSDT",
-      "price": 10.815,
-      "ret7d": null
+      "symbol": "SLXUSDT",
+      "price": 0.24128,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     },
     {
       "date": "2026-06-09",
-      "symbol": "SKHYNIXUSDT",
-      "price": 1467.21,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "ICPUSDT",
-      "price": 2.31,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "HOMEUSDT",
-      "price": 0.02656,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "WLDUSDT",
-      "price": 0.5149,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "FIDAUSDT",
-      "price": 0.02453,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "XLMUSDT",
-      "price": 0.19702,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "WLDUSDT",
-      "price": 0.5221,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "MRVLUSDT",
-      "price": 270.54,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "ZECUSDT",
-      "price": 460.35,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "ALLOUSDT",
-      "price": 0.47054,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "LABUSDT",
-      "price": 10.469,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "BTWUSDT",
-      "price": 0.063934,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "VELVETUSDT",
-      "price": 0.46755,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "HOMEUSDT",
-      "price": 0.03068,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "MUUSDT",
-      "price": 952.04,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "LTCUSDT",
-      "price": 42.31,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "WLDUSDT",
-      "price": 0.5238,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "BTWUSDT",
-      "price": 0.067395,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "ALLOUSDT",
-      "price": 0.45503,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "HOMEUSDT",
-      "price": 0.03069,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "LTCUSDT",
-      "price": 42.25,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "MRVLUSDT",
-      "price": 268.81,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "NVDAUSDT",
-      "price": 205.68,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-09",
-      "symbol": "1000PEPEUSDT",
-      "price": 0.002744,
-      "ret7d": null
+      "symbol": "EWYUSDT",
+      "price": 185.56,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     },
     {
       "date": "2026-06-09",
       "symbol": "SOXLUSDT",
-      "price": 203.64,
-      "ret7d": null
+      "price": 202.01,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     },
     {
       "date": "2026-06-09",
-      "symbol": "LABUSDT",
-      "price": 10.29,
-      "ret7d": null
+      "symbol": "SNDKUSDT",
+      "price": 1730.75,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     },
     {
-      "date": "2026-06-07",
-      "symbol": "PORTALUSDT",
-      "price": 0.0185,
-      "ret7d": null
+      "date": "2026-06-09",
+      "symbol": "BTWUSDT",
+      "price": 0.069112,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     },
     {
-      "date": "2026-06-07",
-      "symbol": "GUNUSDT",
-      "price": 0.006497,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "XLMUSDT",
-      "price": 0.2028,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "MRVLUSDT",
-      "price": 291.59,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "LABUSDT",
-      "price": 12.958,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "TONUSDT",
-      "price": 1.6883,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "BSBUSDT",
-      "price": 0.27588,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "ESPORTSUSDT",
-      "price": 0.06415,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "UBUSDT",
-      "price": 0.1311,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "CLUSDT",
-      "price": 91.39,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "PORTALUSDT",
-      "price": 0.0179,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "GUNUSDT",
-      "price": 0.0065,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "XLMUSDT",
-      "price": 0.2041,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "MRVLUSDT",
-      "price": 292.58,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "LABUSDT",
-      "price": 12.929,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "TONUSDT",
-      "price": 1.6849,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "BSBUSDT",
-      "price": 0.28949,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "ESPORTSUSDT",
-      "price": 0.06483,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "UBUSDT",
-      "price": 0.12933,
-      "ret7d": null
-    },
-    {
-      "date": "2026-06-07",
-      "symbol": "CLUSDT",
-      "price": 91.4,
-      "ret7d": null
+      "date": "2026-06-09",
+      "symbol": "WLDUSDT",
+      "price": 0.5335,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
     }
-  ]
+  ],
+  "stats": {
+    "total": 10,
+    "hit_rate_3d": 0.0,
+    "hit_rate_7d": 0.0,
+    "hit_rate_14d": 0.0,
+    "best_hits": [],
+    "recent": [
+      {
+        "symbol": "VVVUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 16.118,
+        "anomaly_score": 59.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "POWERUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 0.09493,
+        "anomaly_score": 59.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "XLMUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 0.19848,
+        "anomaly_score": 59.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "GWEIUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 0.17163,
+        "anomaly_score": 60.5,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "SLXUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 0.24128,
+        "anomaly_score": 60.5,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "EWYUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 185.56,
+        "anomaly_score": 61.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "SOXLUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 202.01,
+        "anomaly_score": 61.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "SNDKUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 1730.75,
+        "anomaly_score": 64.5,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "BTWUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 0.069112,
+        "anomaly_score": 67.5,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "WLDUSDT",
+        "detect_date": "2026-06-09",
+        "detect_price": 0.5335,
+        "anomaly_score": 75.5,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      }
+    ]
+  }
 }

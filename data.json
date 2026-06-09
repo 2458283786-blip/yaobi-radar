@@ -1,12 +1,12 @@
 {
-  "updated": "2026-06-09T23:02:27.912206",
+  "updated": "2026-06-09T23:12:07.157252",
   "regime": "Sideways",
   "total_scanned": 95,
   "candidates": [
     {
       "rank": 1,
       "symbol": "WLDUSDT",
-      "score": 84.5,
+      "score": 75.5,
       "anomalies": [
         {
           "type": "volatility_compression",
@@ -16,18 +16,13 @@
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+14.4% vs BTC): 独立走强"
-        },
-        {
-          "type": "oi_acceleration",
-          "score": 70,
-          "detail": "OI温和加速(+12%): 资金开始流入"
+          "detail": "相对强度显著(+14.7% vs BTC): 独立走强"
         }
       ],
       "warnings": [],
-      "oi": 193519629.0,
+      "oi": 193894419.0,
       "funding": -0.00017539,
-      "volume_24h": 785192282.2323,
+      "volume_24h": 787562591.267,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "未知",
@@ -39,28 +34,28 @@
     {
       "rank": 2,
       "symbol": "BTWUSDT",
-      "score": 84.0,
+      "score": 67.5,
       "anomalies": [
-        {
-          "type": "oi_acceleration",
-          "score": 90,
-          "detail": "OI加速增长(+22%): OI在近3期增速超过前3期"
-        },
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+12.3% vs BTC): 独立走强"
+          "detail": "相对强度显著(+15.5% vs BTC): 独立走强"
+        },
+        {
+          "type": "oi_acceleration",
+          "score": 70,
+          "detail": "OI温和加速(+8%): 资金开始流入"
         },
         {
           "type": "oi_mc_divergence",
-          "score": 80,
-          "detail": "OI/Vol比快速上升(+33%): 持仓相对成交量在膨胀"
+          "score": 30,
+          "detail": "OI/Vol比微升(+6%)"
         }
       ],
       "warnings": [],
-      "oi": 75471725.0,
+      "oi": 76832376.0,
       "funding": 5e-05,
-      "volume_24h": 63874119.474804,
+      "volume_24h": 64554411.495175,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "未知",
@@ -71,34 +66,26 @@
     },
     {
       "rank": 3,
-      "symbol": "ALLOUSDT",
-      "score": 75.5,
+      "symbol": "SNDKUSDT",
+      "score": 64.5,
       "anomalies": [
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+45.6% vs BTC): 独立走强"
+          "detail": "相对强度显著(+11.0% vs BTC): 独立走强"
         },
         {
-          "type": "oi_mc_divergence",
-          "score": 80,
-          "detail": "OI/Vol比快速上升(+40%): 持仓相对成交量在膨胀"
-        },
-        {
-          "type": "oi_acceleration",
-          "score": 70,
-          "detail": "OI温和加速(+11%): 资金开始流入"
+          "type": "volume_expansion",
+          "score": 65,
+          "detail": "成交量温和扩张(连续3期)"
         }
       ],
       "warnings": [],
-      "oi": 61071585.0,
-      "funding": 5e-05,
-      "volume_24h": 385968540.95192,
-      "crash_risk": 23,
-      "crash_warnings": [
-        "短期急涨",
-        "RSI偏高"
-      ],
+      "oi": 25127.36,
+      "funding": 0.0,
+      "volume_24h": 454169109.6505,
+      "crash_risk": 0,
+      "crash_warnings": [],
       "social_heat": "未知",
       "twitter_followers": 0,
       "stealth_phase": false,
@@ -107,29 +94,29 @@
     },
     {
       "rank": 4,
-      "symbol": "LTCUSDT",
-      "score": 72.5,
+      "symbol": "SOXLUSDT",
+      "score": 61.0,
       "anomalies": [
         {
-          "type": "volatility_compression",
-          "score": 90,
-          "detail": "波动率极度压缩(带宽5.8%, 分位3%)"
+          "type": "relative_strength",
+          "score": 85,
+          "detail": "相对强度显著(+10.5% vs BTC): 独立走强"
+        },
+        {
+          "type": "volume_expansion",
+          "score": 40,
+          "detail": "成交量略有扩张(+11%)"
         },
         {
           "type": "oi_mc_divergence",
-          "score": 80,
-          "detail": "OI/Vol比快速上升(+32%): 持仓相对成交量在膨胀"
-        },
-        {
-          "type": "oi_acceleration",
-          "score": 45,
-          "detail": "OI小幅加速(+3%)"
+          "score": 30,
+          "detail": "OI/Vol比微升(+11%)"
         }
       ],
       "warnings": [],
-      "oi": 1071297.386,
-      "funding": -2.314e-05,
-      "volume_24h": 60563113.41,
+      "oi": 113597.88,
+      "funding": 0.00010663,
+      "volume_24h": 456409751.9514,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "未知",
@@ -140,29 +127,29 @@
     },
     {
       "rank": 5,
-      "symbol": "SOXLUSDT",
-      "score": 68.5,
+      "symbol": "EWYUSDT",
+      "score": 61.0,
       "anomalies": [
         {
           "type": "oi_acceleration",
-          "score": 90,
-          "detail": "OI加速增长(+46%): OI在近3期增速超过前3期"
+          "score": 70,
+          "detail": "OI温和加速(+15%): 资金开始流入"
         },
         {
           "type": "relative_strength",
           "score": 60,
-          "detail": "相对强度偏强(+8.6% vs BTC)"
+          "detail": "相对强度偏强(+5.3% vs BTC)"
         },
         {
-          "type": "volume_expansion",
-          "score": 40,
-          "detail": "成交量略有扩张(+53%)"
+          "type": "volatility_compression",
+          "score": 30,
+          "detail": "波动率正常偏低(分位37%)"
         }
       ],
       "warnings": [],
-      "oi": 117844.63,
-      "funding": 0.00010663,
-      "volume_24h": 447617227.6117,
+      "oi": 83909.76,
+      "funding": -0.00019658,
+      "volume_24h": 161280345.8068,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "未知",
@@ -173,31 +160,30 @@
     },
     {
       "rank": 6,
-      "symbol": "JTOUSDT",
-      "score": 68.5,
+      "symbol": "SLXUSDT",
+      "score": 60.5,
       "anomalies": [
         {
-          "type": "funding_divergence",
+          "type": "relative_strength",
           "score": 85,
-          "detail": "费率背离: 价格-3.4%但费率从-0.023%升至0.000%(空头撤退)"
+          "detail": "相对强度显著(+41.4% vs BTC): 独立走强"
         },
         {
           "type": "oi_acceleration",
           "score": 70,
-          "detail": "OI温和加速(+12%): 资金开始流入"
-        },
-        {
-          "type": "relative_strength",
-          "score": 35,
-          "detail": "略微跑赢大盘(+1.0%)"
+          "detail": "OI温和加速(+9%): 资金开始流入"
         }
       ],
       "warnings": [],
-      "oi": 15829078.0,
-      "funding": 7.4e-07,
-      "volume_24h": 61606116.1452,
-      "crash_risk": 0,
-      "crash_warnings": [],
+      "oi": 22800253.0,
+      "funding": 5.443e-05,
+      "volume_24h": 151816592.55478,
+      "crash_risk": 38,
+      "crash_warnings": [
+        "短期急涨",
+        "暴量出货",
+        "RSI偏高"
+      ],
       "social_heat": "未知",
       "twitter_followers": 0,
       "stealth_phase": false,
@@ -206,31 +192,29 @@
     },
     {
       "rank": 7,
-      "symbol": "TONUSDT",
-      "score": 67.5,
+      "symbol": "GWEIUSDT",
+      "score": 60.5,
       "anomalies": [
         {
-          "type": "volatility_compression",
-          "score": 90,
-          "detail": "波动率极度压缩(带宽16.6%, 分位3%)"
-        },
-        {
-          "type": "oi_acceleration",
-          "score": 70,
-          "detail": "OI温和加速(+10%): 资金开始流入"
-        },
-        {
           "type": "relative_strength",
-          "score": 35,
-          "detail": "略微跑赢大盘(+4.1%)"
+          "score": 85,
+          "detail": "相对强度显著(+30.5% vs BTC): 独立走强"
+        },
+        {
+          "type": "funding_divergence",
+          "score": 60,
+          "detail": "费率微背离: 价格微跌但费率上升(空头犹豫)"
         }
       ],
       "warnings": [],
-      "oi": 26734910.2,
-      "funding": -1.97e-06,
-      "volume_24h": 104991221.00159,
-      "crash_risk": 0,
-      "crash_warnings": [],
+      "oi": 126099402.0,
+      "funding": 0.00066972,
+      "volume_24h": 84347872.591461,
+      "crash_risk": 28,
+      "crash_warnings": [
+        "暴量出货",
+        "RSI偏高"
+      ],
       "social_heat": "未知",
       "twitter_followers": 0,
       "stealth_phase": false,
@@ -239,29 +223,24 @@
     },
     {
       "rank": 8,
-      "symbol": "FILUSDT",
-      "score": 67.5,
+      "symbol": "XLMUSDT",
+      "score": 59.0,
       "anomalies": [
         {
           "type": "volatility_compression",
           "score": 90,
-          "detail": "波动率极度压缩(带宽11.0%, 分位3%)"
+          "detail": "波动率极度压缩(带宽8.8%, 分位3%)"
         },
         {
           "type": "oi_acceleration",
-          "score": 70,
-          "detail": "OI温和加速(+9%): 资金开始流入"
-        },
-        {
-          "type": "relative_strength",
-          "score": 35,
-          "detail": "略微跑赢大盘(+1.9%)"
+          "score": 45,
+          "detail": "OI小幅加速(+4%)"
         }
       ],
       "warnings": [],
-      "oi": 44503683.0,
-      "funding": -3.439e-05,
-      "volume_24h": 80355128.756,
+      "oi": 248750433.0,
+      "funding": -0.0001844,
+      "volume_24h": 129995841.33753,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "未知",
@@ -272,31 +251,34 @@
     },
     {
       "rank": 9,
-      "symbol": "PENGUUSDT",
-      "score": 64.5,
+      "symbol": "POWERUSDT",
+      "score": 59.0,
       "anomalies": [
         {
-          "type": "oi_acceleration",
-          "score": 90,
-          "detail": "OI加速增长(+16%): OI在近3期增速超过前3期"
-        },
-        {
-          "type": "volatility_compression",
-          "score": 50,
-          "detail": "波动率偏紧(分位20%)"
-        },
-        {
           "type": "relative_strength",
-          "score": 35,
-          "detail": "略微跑赢大盘(+1.1%)"
+          "score": 85,
+          "detail": "相对强度显著(+57.5% vs BTC): 独立走强"
+        },
+        {
+          "type": "oi_acceleration",
+          "score": 45,
+          "detail": "OI小幅加速(+4%)"
+        },
+        {
+          "type": "volume_expansion",
+          "score": 40,
+          "detail": "成交量略有扩张(+18%)"
         }
       ],
       "warnings": [],
-      "oi": 1818051516.0,
-      "funding": 5e-05,
-      "volume_24h": 32894449.453041,
-      "crash_risk": 0,
-      "crash_warnings": [],
+      "oi": 59194769.0,
+      "funding": 0.00060064,
+      "volume_24h": 123282555.11578,
+      "crash_risk": 35,
+      "crash_warnings": [
+        "短期急涨",
+        "RSI超买"
+      ],
       "social_heat": "未知",
       "twitter_followers": 0,
       "stealth_phase": false,
@@ -305,29 +287,29 @@
     },
     {
       "rank": 10,
-      "symbol": "NVDAUSDT",
-      "score": 64.0,
+      "symbol": "VVVUSDT",
+      "score": 59.0,
       "anomalies": [
         {
           "type": "volatility_compression",
           "score": 90,
-          "detail": "波动率极度压缩(带宽4.4%, 分位7%)"
-        },
-        {
-          "type": "volume_expansion",
-          "score": 40,
-          "detail": "成交量略有扩张(+26%)"
+          "detail": "波动率极度压缩(带宽14.6%, 分位3%)"
         },
         {
           "type": "relative_strength",
           "score": 35,
-          "detail": "略微跑赢大盘(+0.5%)"
+          "detail": "略微跑赢大盘(+2.4%)"
+        },
+        {
+          "type": "oi_mc_divergence",
+          "score": 30,
+          "detail": "OI/Vol比微升(+6%)"
         }
       ],
       "warnings": [],
-      "oi": 146168.59,
-      "funding": 0.00021137,
-      "volume_24h": 67202647.8823,
+      "oi": 1405881.63,
+      "funding": -0.00025597,
+      "volume_24h": 56541658.45942,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "未知",
