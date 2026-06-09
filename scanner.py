@@ -34,28 +34,23 @@ def main():
     tickers = [t for t in tickers if t["symbol"] not in EXCLUDE_SYMBOLS]
     print(f"    {len(tickers)} contracts")
     if not tickers:
-        print("    [DEBUG] All Binance endpoints failed! Trying direct ping...")
-        import requests
-        for b in ["https://fapi.binance.com", "https://fapi1.binance.com", "https://fapi2.binance.com", "https://fapi3.binance.com"]:
-            try:
-                r = requests.get(b + "/fapi/v1/ping", timeout=10)
-                print(f"    [DEBUG] {b}: HTTP {r.status_code}")
-            except Exception as e:
-                print(f"    [DEBUG] {b}: {e}")
+        print("    FATAL: No tickers fetched. Check network/proxy.")
+        return
 
     print("\n[3] CoinGecko...")
     symbols = [t["symbol"] for t in tickers[:50]]
     cg_data = collect_coingecko_market_data(symbols)
     print(f"    {len(cg_data)} coins")
 
-    # Social media attention (low = potential stealth phase)
+    # Social media attention
     print("\n[Social] Checking social attention...")
     from src.social import get_social_data
     try:
         social_data = get_social_data(symbols[:20])
-    except Exception:
-        social_data = {}  # Top 20 only to save API calls
         print(f"    Got social data for {len(social_data)} coins")
+    except Exception:
+        social_data = {}
+        print("    Social data skipped")
 
     print("\n[4] Snapshots...")
     snapshots = []
@@ -75,6 +70,7 @@ def main():
 
     print("\n[5] Anomaly detection...")
     results = []
+    crash_results = []
     kline_ok = 0
     kline_fail = 0
     for i, snap in enumerate(snapshots):
@@ -82,18 +78,20 @@ def main():
         try:
             kl = collect_klines(snap["symbol"], "4h", 120)
             if not kl or len(kl) < 30:
-                if i == 0: print(f"    [DEBUG] First kline failed: {snap['symbol']}")
+                kline_fail += 1
                 continue
+            kline_ok += 1
             a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl)
             if a["composite_score"] >= 20: results.append(a)
             try:
                 crash = detect_crash_risks(snap["symbol"], kl, snap)
-                if crash["score"] >= 20: crash_results.append({"symbol": snap["symbol"], **crash})
-            except Exception as ce:
-                pass  # crash detection is non-critical
-        except: continue
-
-    crash_results = []
+                if crash["score"] >= 20:
+                    crash_results.append({"symbol": snap["symbol"], **crash})
+            except Exception:
+                pass
+        except Exception:
+            kline_fail += 1
+            continue
 
     print(f"    Klines: {kline_ok} ok / {kline_fail} failed")
     print(f"    Raw anomalies detected: {len(results)}")
@@ -116,7 +114,7 @@ def main():
     with open("docs/report.md", "w", encoding="utf-8") as f:
         f.write(f"# Latest: {today}\n\n{summary}")
 
-    # Save JSON (with contract data - NO duplicates)
+    # Save JSON (no duplicates)
     json_data = {
         "updated": datetime.now().isoformat(),
         "regime": regime,
@@ -151,7 +149,7 @@ def main():
         json.dump(json_data, f, ensure_ascii=False, indent=2)
     print("JSON saved")
 
-    # AI analysis (optional)
+    # AI analysis
     try:
         from src.ai_analysis import analyze_with_ai
         print("\n[AI] Running...")
@@ -176,7 +174,6 @@ def main():
         conn.close()
         with open("docs/backtest.json", "w", encoding="utf-8") as f:
             json.dump({"updated": today, "entries": bt}, f, ensure_ascii=False, indent=2)
-        # Save history manifest
         import glob
         history_files = sorted(glob.glob("docs/report-*.md"), reverse=True)
         history_list = [f.replace("\\","/").replace("docs/","").replace(".md","").replace("report-","") for f in history_files[:30]]
@@ -187,7 +184,7 @@ def main():
         print("Backtest saved")
     except: pass
 
-    # Save rankings for future backtest
+    # Save rankings for backtest
     rankings = []
     for i, r in enumerate(top10):
         rankings.append({"rank": i+1, "symbol": r["symbol"], "score": r["composite_score"],
@@ -206,6 +203,3 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\nError: {e}")
         import traceback; traceback.print_exc()
-
-
-
