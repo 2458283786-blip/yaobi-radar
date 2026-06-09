@@ -104,6 +104,19 @@ def get_history(symbol: str, days: int = 7) -> list:
     conn.close()
     return [dict(r) for r in rows]
 
+
+def get_vol_history(symbol: str, lookback_hours: int = 48) -> list:
+    """???????(??????)"""
+    conn = get_db()
+    cutoff = int(time.time()) - lookback_hours * 3600
+    rows = conn.execute("""
+        SELECT volume_24h FROM market_snapshots
+        WHERE symbol = ? AND timestamp >= ?
+        ORDER BY timestamp ASC
+    """, (symbol, cutoff)).fetchall()
+    conn.close()
+    return [r[0] for r in rows if r[0] and r[0] > 0]
+
 def get_latest_snapshot(symbol: str) -> dict | None:
     conn = get_db()
     row = conn.execute("""

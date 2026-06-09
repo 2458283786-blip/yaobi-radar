@@ -401,6 +401,43 @@ def match_success_patterns(snapshot: dict, history: list) -> list:
 
 
 
+
+def detect_volume_breakout(symbol: str, current_vol: float, vol_history: list) -> dict:
+    """
+    ???????: ????
+    - ??VELVET?: ??????? = ???????
+    """
+    if not vol_history or len(vol_history) < 2:
+        return {"score": 0, "detail": "???????"}
+
+    prev_vol = vol_history[0]
+    if prev_vol <= 0 or current_vol <= 0:
+        return {"score": 0, "detail": "????"}
+
+    vol_change = (current_vol - prev_vol) / prev_vol * 100
+
+    if vol_change > 500:
+        score = 85
+        detail = f"?????(+{vol_change:.0f}%): ??????TOP?"
+    elif vol_change > 200:
+        score = 65
+        detail = f"?????(+{vol_change:.0f}%): ??????"
+    elif vol_change > 100:
+        score = 45
+        detail = f"?????(+{vol_change:.0f}%)"
+    elif vol_change > 50:
+        score = 25
+        detail = f"???????(+{vol_change:.0f}%)"
+    elif vol_change > 20:
+        score = 10
+        detail = f"?????(+{vol_change:.0f}%)"
+    else:
+        score = 0
+        detail = f"?????({vol_change:+.0f}%)"
+
+    return {"score": score, "detail": detail, "vol_change_pct": round(vol_change, 1)}
+
+
 def detect_social_momentum(social_data: dict) -> dict:
     """
     ??????: ???????
@@ -438,7 +475,8 @@ def detect_social_momentum(social_data: dict) -> dict:
 
 def detect_all_anomalies(symbol: str, ticker: dict, klines: list,
                          btc_klines: list = None,
-                         social_data: dict = None) -> dict:
+                         social_data: dict = None,
+                         vol_history: list = None) -> dict:
     """
     综合分析一个币的所有市场结构异常
     返回: 综合异常报告
@@ -454,9 +492,10 @@ def detect_all_anomalies(symbol: str, ticker: dict, klines: list,
     rs_strength = detect_relative_strength(klines, btc_klines)
     persist = calc_persistence_score(history) if history else {"score": 0, "detail": "无历史"}
     social_mom = detect_social_momentum(social_data)
+    vol_break = detect_volume_breakout(symbol, float(ticker.get("volume_24h", 0)), vol_history or [])
 
     # 综合异常分: 各维度取最高分(不是求和, 是发现异常)
-    anomalies = [oi_accel, vol_exp, vol_comp, fund_div, oi_mc, rs_strength, social_mom]
+    anomalies = [oi_accel, vol_exp, vol_comp, fund_div, oi_mc, rs_strength, social_mom, vol_break]
     anomaly_scores = [a["score"] for a in anomalies]
     top_anomalies = sorted(anomaly_scores, reverse=True)
 
@@ -495,6 +534,7 @@ def detect_all_anomalies(symbol: str, ticker: dict, klines: list,
             "oi_mc_divergence": oi_mc,
             "relative_strength": rs_strength,
             "social_momentum": social_mom,
+            "volume_breakout": vol_break,
         },
         "persistence": persist,
         "failure_warnings": failures,

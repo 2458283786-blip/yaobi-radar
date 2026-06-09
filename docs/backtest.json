@@ -3,6 +3,126 @@
   "entries": [
     {
       "date": "2026-06-10",
+      "symbol": "FILUSDT",
+      "price": 0.762,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "1000PEPEUSDT",
+      "price": 0.0027655,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "DOGEUSDT",
+      "price": 0.08463,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "SNDKUSDT",
+      "price": 1613.45,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "MRVLUSDT",
+      "price": 262.73,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "ASTERUSDT",
+      "price": 0.6207,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "TAOUSDT",
+      "price": 205.6,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "PARTIUSDT",
+      "price": 0.05558,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "PORTALUSDT",
+      "price": 0.01562,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "DASHUSDT",
+      "price": 35.25,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "OPNUSDT",
+      "price": 0.0906,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "NVDAUSDT",
+      "price": 206.02,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "HOMEUSDT",
+      "price": 0.03245,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "CRCLUSDT",
+      "price": 79.71,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
+      "symbol": "BTWUSDT",
+      "price": 0.092009,
+      "ret3d": null,
+      "ret7d": null,
+      "ret14d": null
+    },
+    {
+      "date": "2026-06-10",
       "symbol": "ASTERUSDT",
       "price": 0.6212,
       "ret3d": null,
@@ -83,12 +203,147 @@
     }
   ],
   "stats": {
-    "total": 10,
+    "total": 25,
     "hit_rate_3d": 0.0,
     "hit_rate_7d": 0.0,
     "hit_rate_14d": 0.0,
     "best_hits": [],
     "recent": [
+      {
+        "symbol": "FILUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.762,
+        "anomaly_score": 82.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "1000PEPEUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.0027655,
+        "anomaly_score": 82.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "DOGEUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.08463,
+        "anomaly_score": 82.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "SNDKUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 1613.45,
+        "anomaly_score": 82.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "MRVLUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 262.73,
+        "anomaly_score": 82.5,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "ASTERUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.6207,
+        "anomaly_score": 84.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "TAOUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 205.6,
+        "anomaly_score": 84.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "PARTIUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.05558,
+        "anomaly_score": 86.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "PORTALUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.01562,
+        "anomaly_score": 87.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "DASHUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 35.25,
+        "anomaly_score": 87.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "OPNUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.0906,
+        "anomaly_score": 87.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "NVDAUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 206.02,
+        "anomaly_score": 87.5,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "HOMEUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.03245,
+        "anomaly_score": 88.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "CRCLUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 79.71,
+        "anomaly_score": 88.5,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
+      {
+        "symbol": "BTWUSDT",
+        "detect_date": "2026-06-10",
+        "detect_price": 0.092009,
+        "anomaly_score": 90.0,
+        "return_3d": null,
+        "return_7d": null,
+        "return_14d": null
+      },
       {
         "symbol": "ASTERUSDT",
         "detect_date": "2026-06-10",
@@ -130,51 +385,6 @@
         "detect_date": "2026-06-10",
         "detect_price": 705.73,
         "anomaly_score": 85.5,
-        "return_3d": null,
-        "return_7d": null,
-        "return_14d": null
-      },
-      {
-        "symbol": "DASHUSDT",
-        "detect_date": "2026-06-10",
-        "detect_price": 35.24,
-        "anomaly_score": 87.0,
-        "return_3d": null,
-        "return_7d": null,
-        "return_14d": null
-      },
-      {
-        "symbol": "NVDAUSDT",
-        "detect_date": "2026-06-10",
-        "detect_price": 206.31,
-        "anomaly_score": 87.0,
-        "return_3d": null,
-        "return_7d": null,
-        "return_14d": null
-      },
-      {
-        "symbol": "BTWUSDT",
-        "detect_date": "2026-06-10",
-        "detect_price": 0.09124,
-        "anomaly_score": 87.0,
-        "return_3d": null,
-        "return_7d": null,
-        "return_14d": null
-      },
-      {
-        "symbol": "SPCXUSDT",
-        "detect_date": "2026-06-10",
-        "detect_price": 170.02,
-        "anomaly_score": 89.5,
-        "return_3d": null,
-        "return_7d": null,
-        "return_14d": null
-      },
-      {
-        "symbol": "MRVLUSDT",
-        "detect_date": "2026-06-10",
-        "detect_price": 263.32,
-        "anomaly_score": 92.5,
         "return_3d": null,
         "return_7d": null,
         "return_14d": null

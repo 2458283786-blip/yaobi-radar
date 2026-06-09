@@ -5,7 +5,7 @@ if sys.platform == "win32":
     except: pass
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from src.db import init_db, insert_snapshot, save_ranking, log_detection, compute_detection_returns, get_detection_stats, get_latest_backtest_entries
+from src.db import init_db, insert_snapshot, save_ranking, log_detection, compute_detection_returns, get_detection_stats, get_latest_backtest_entries, get_vol_history
 from src.collector import *
 from src.analyzer import detect_all_anomalies, assess_market_regime
 from src.crash_detector import detect_crash_risks
@@ -95,7 +95,7 @@ def main():
                 kline_fail += 1
                 continue
             kline_ok += 1
-            a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl, social_data.get(snap["symbol"]))
+            a = detect_all_anomalies(snap["symbol"], snap, kl, btc_kl, social_data.get(snap["symbol"]), get_vol_history(snap["symbol"]))
             if a["composite_score"] >= 20: results.append(a)
             try:
                 crash = detect_crash_risks(snap["symbol"], kl, snap)

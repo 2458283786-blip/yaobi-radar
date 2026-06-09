@@ -1,22 +1,22 @@
 {
-  "updated": "2026-06-10T07:25:55.628143",
+  "updated": "2026-06-10T07:35:40.868267",
   "regime": "Sideways",
-  "total_scanned": 95,
+  "total_scanned": 195,
   "candidates": [
     {
       "rank": 1,
-      "symbol": "MRVLUSDT",
-      "score": 92.5,
+      "symbol": "BTWUSDT",
+      "score": 90.0,
       "anomalies": [
         {
           "type": "oi_acceleration",
           "score": 90,
-          "detail": "OI加速增长(+41%): OI在近3期增速超过前3期"
+          "detail": "OI加速增长(+60%): OI在近3期增速超过前3期"
         },
         {
-          "type": "funding_divergence",
+          "type": "relative_strength",
           "score": 85,
-          "detail": "费率背离: 价格-10.0%但费率从0.000%升至0.033%(空头撤退)"
+          "detail": "相对强度显著(+82.9% vs BTC): 独立走强"
         },
         {
           "type": "social_momentum",
@@ -25,9 +25,9 @@
         }
       ],
       "warnings": [],
-      "oi": 257309.13,
-      "funding": 0.00040206,
-      "volume_24h": 726485532.0333,
+      "oi": 108681112.0,
+      "funding": 0.00062974,
+      "volume_24h": 113992231.616186,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",
@@ -38,29 +38,29 @@
     },
     {
       "rank": 2,
-      "symbol": "SPCXUSDT",
-      "score": 89.5,
+      "symbol": "CRCLUSDT",
+      "score": 88.5,
       "anomalies": [
         {
           "type": "oi_acceleration",
           "score": 90,
-          "detail": "OI加速增长(+77%): OI在近3期增速超过前3期"
+          "detail": "OI加速增长(+15%): OI在近3期增速超过前3期"
+        },
+        {
+          "type": "volatility_compression",
+          "score": 90,
+          "detail": "波动率极度压缩(带宽8.6%, 分位3%)"
         },
         {
           "type": "social_momentum",
           "score": 85,
           "detail": "???: 低关注 + ??Trending?? ? ???????"
-        },
-        {
-          "type": "volatility_compression",
-          "score": 70,
-          "detail": "波动率显著压缩(分位10%)"
         }
       ],
       "warnings": [],
-      "oi": 780004.82,
-      "funding": 5e-05,
-      "volume_24h": 179910503.3274,
+      "oi": 443150.06,
+      "funding": 0.0,
+      "volume_24h": 142488538.0576,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",
@@ -71,18 +71,18 @@
     },
     {
       "rank": 3,
-      "symbol": "BTWUSDT",
-      "score": 87.0,
+      "symbol": "HOMEUSDT",
+      "score": 88.0,
       "anomalies": [
         {
-          "type": "oi_acceleration",
-          "score": 90,
-          "detail": "OI加速增长(+27%): OI在近3期增速超过前3期"
+          "type": "funding_divergence",
+          "score": 85,
+          "detail": "费率背离: 价格-7.0%但费率从-1.157%升至-0.340%(空头撤退)"
         },
         {
           "type": "relative_strength",
           "score": 85,
-          "detail": "相对强度显著(+80.0% vs BTC): 独立走强"
+          "detail": "相对强度显著(+11.8% vs BTC): 独立走强"
         },
         {
           "type": "social_momentum",
@@ -90,12 +90,10 @@
           "detail": "???: 低关注 + ??Trending?? ? ???????"
         }
       ],
-      "warnings": [
-        "缩量反弹"
-      ],
-      "oi": 108049479.0,
-      "funding": 0.00062974,
-      "volume_24h": 112281480.257878,
+      "warnings": [],
+      "oi": 493927026.0,
+      "funding": -0.00411217,
+      "volume_24h": 124303145.493081,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",
@@ -107,7 +105,7 @@
     {
       "rank": 4,
       "symbol": "NVDAUSDT",
-      "score": 87.0,
+      "score": 87.5,
       "anomalies": [
         {
           "type": "volatility_compression",
@@ -120,15 +118,15 @@
           "detail": "???: 低关注 + ??Trending?? ? ???????"
         },
         {
-          "type": "oi_acceleration",
-          "score": 70,
-          "detail": "OI温和加速(+13%): 资金开始流入"
+          "type": "funding_divergence",
+          "score": 60,
+          "detail": "费率微背离: 价格微跌但费率上升(空头犹豫)"
         }
       ],
       "warnings": [],
-      "oi": 143028.3,
+      "oi": 143154.82,
       "funding": 0.00016645,
-      "volume_24h": 89094022.3789,
+      "volume_24h": 89152040.5103,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",
@@ -139,6 +137,41 @@
     },
     {
       "rank": 5,
+      "symbol": "OPNUSDT",
+      "score": 87.0,
+      "anomalies": [
+        {
+          "type": "funding_divergence",
+          "score": 85,
+          "detail": "费率背离: 价格-30.9%但费率从-0.053%升至-0.004%(空头撤退)"
+        },
+        {
+          "type": "social_momentum",
+          "score": 85,
+          "detail": "???: 低关注 + ??Trending?? ? ???????"
+        },
+        {
+          "type": "oi_mc_divergence",
+          "score": 80,
+          "detail": "OI/Vol比快速上升(+124%): 持仓相对成交量在膨胀"
+        }
+      ],
+      "warnings": [
+        "缩量反弹"
+      ],
+      "oi": 88969619.0,
+      "funding": -8.806e-05,
+      "volume_24h": 51886228.5154,
+      "crash_risk": 0,
+      "crash_warnings": [],
+      "social_heat": "低关注",
+      "twitter_followers": 0,
+      "stealth_phase": true,
+      "trending_score": 0,
+      "reddit_subscribers": 0
+    },
+    {
+      "rank": 6,
       "symbol": "DASHUSDT",
       "score": 87.0,
       "anomalies": [
@@ -150,7 +183,7 @@
         {
           "type": "funding_divergence",
           "score": 85,
-          "detail": "费率背离: 价格-6.3%但费率从-0.039%升至-0.012%(空头撤退)"
+          "detail": "费率背离: 价格-7.2%但费率从-0.039%升至0.003%(空头撤退)"
         },
         {
           "type": "social_momentum",
@@ -159,42 +192,9 @@
         }
       ],
       "warnings": [],
-      "oi": 347992.564,
+      "oi": 347852.173,
       "funding": 5.387e-05,
-      "volume_24h": 40427615.7,
-      "crash_risk": 0,
-      "crash_warnings": [],
-      "social_heat": "低关注",
-      "twitter_followers": 0,
-      "stealth_phase": true,
-      "trending_score": 0,
-      "reddit_subscribers": 0
-    },
-    {
-      "rank": 6,
-      "symbol": "QQQUSDT",
-      "score": 85.5,
-      "anomalies": [
-        {
-          "type": "oi_acceleration",
-          "score": 90,
-          "detail": "OI加速增长(+28%): OI在近3期增速超过前3期"
-        },
-        {
-          "type": "social_momentum",
-          "score": 85,
-          "detail": "???: 低关注 + ??Trending?? ? ???????"
-        },
-        {
-          "type": "volatility_compression",
-          "score": 50,
-          "detail": "波动率偏紧(分位23%)"
-        }
-      ],
-      "warnings": [],
-      "oi": 38763.67,
-      "funding": 0.0,
-      "volume_24h": 225816351.2833,
+      "volume_24h": 40360882.33,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",
@@ -205,29 +205,29 @@
     },
     {
       "rank": 7,
-      "symbol": "WLDUSDT",
-      "score": 85.0,
+      "symbol": "PORTALUSDT",
+      "score": 87.0,
       "anomalies": [
         {
           "type": "volatility_compression",
           "score": 90,
-          "detail": "波动率极度压缩(带宽30.2%, 分位3%)"
+          "detail": "波动率极度压缩(带宽27.3%, 分位3%)"
+        },
+        {
+          "type": "funding_divergence",
+          "score": 85,
+          "detail": "费率背离: 价格-15.6%但费率从-0.074%升至-0.052%(空头撤退)"
         },
         {
           "type": "social_momentum",
           "score": 85,
           "detail": "???: 低关注 + ??Trending?? ? ???????"
-        },
-        {
-          "type": "relative_strength",
-          "score": 60,
-          "detail": "相对强度偏强(+8.2% vs BTC)"
         }
       ],
       "warnings": [],
-      "oi": 184638448.0,
-      "funding": -9.29e-06,
-      "volume_24h": 618960366.562,
+      "oi": 234821412.2,
+      "funding": -0.00010348,
+      "volume_24h": 13358882.182821,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",
@@ -238,29 +238,29 @@
     },
     {
       "rank": 8,
-      "symbol": "HOMEUSDT",
-      "score": 85.0,
+      "symbol": "PARTIUSDT",
+      "score": 86.0,
       "anomalies": [
         {
-          "type": "funding_divergence",
-          "score": 85,
-          "detail": "费率背离: 价格-14.2%但费率从-1.043%升至-0.627%(空头撤退)"
-        },
-        {
-          "type": "relative_strength",
-          "score": 85,
-          "detail": "相对强度显著(+10.7% vs BTC): 独立走强"
+          "type": "volatility_compression",
+          "score": 90,
+          "detail": "波动率极度压缩(带宽14.7%, 分位3%)"
         },
         {
           "type": "social_momentum",
           "score": 85,
           "detail": "???: 低关注 + ??Trending?? ? ???????"
+        },
+        {
+          "type": "oi_mc_divergence",
+          "score": 80,
+          "detail": "OI/Vol比快速上升(+66%): 持仓相对成交量在膨胀"
         }
       ],
       "warnings": [],
-      "oi": 493436999.0,
-      "funding": -0.00411217,
-      "volume_24h": 124507831.750911,
+      "oi": 158923562.0,
+      "funding": 5e-05,
+      "volume_24h": 8952109.2214,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",
@@ -271,13 +271,13 @@
     },
     {
       "rank": 9,
-      "symbol": "OPNUSDT",
+      "symbol": "TAOUSDT",
       "score": 84.0,
       "anomalies": [
         {
-          "type": "funding_divergence",
-          "score": 85,
-          "detail": "费率背离: 价格-30.5%但费率从-0.053%升至-0.019%(空头撤退)"
+          "type": "volatility_compression",
+          "score": 90,
+          "detail": "波动率极度压缩(带宽13.8%, 分位3%)"
         },
         {
           "type": "social_momentum",
@@ -285,15 +285,15 @@
           "detail": "???: 低关注 + ??Trending?? ? ???????"
         },
         {
-          "type": "oi_mc_divergence",
-          "score": 80,
-          "detail": "OI/Vol比快速上升(+81%): 持仓相对成交量在膨胀"
+          "type": "oi_acceleration",
+          "score": 70,
+          "detail": "OI温和加速(+9%): 资金开始流入"
         }
       ],
       "warnings": [],
-      "oi": 88910279.0,
-      "funding": -8.806e-05,
-      "volume_24h": 52072854.0477,
+      "oi": 226597.873,
+      "funding": 5e-05,
+      "volume_24h": 88626961.61,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",
@@ -320,13 +320,178 @@
         {
           "type": "oi_mc_divergence",
           "score": 55,
-          "detail": "OI/Vol比上升(+16%)"
+          "detail": "OI/Vol比上升(+19%)"
         }
       ],
       "warnings": [],
-      "oi": 117023215.0,
+      "oi": 117028249.0,
       "funding": 5e-05,
-      "volume_24h": 50912021.7051,
+      "volume_24h": 50725377.7623,
+      "crash_risk": 0,
+      "crash_warnings": [],
+      "social_heat": "低关注",
+      "twitter_followers": 0,
+      "stealth_phase": true,
+      "trending_score": 0,
+      "reddit_subscribers": 0
+    },
+    {
+      "rank": 11,
+      "symbol": "MRVLUSDT",
+      "score": 82.5,
+      "anomalies": [
+        {
+          "type": "funding_divergence",
+          "score": 85,
+          "detail": "费率背离: 价格-10.9%但费率从0.000%升至0.046%(空头撤退)"
+        },
+        {
+          "type": "social_momentum",
+          "score": 85,
+          "detail": "???: 低关注 + ??Trending?? ? ???????"
+        },
+        {
+          "type": "oi_acceleration",
+          "score": 45,
+          "detail": "OI小幅加速(+5%)"
+        }
+      ],
+      "warnings": [],
+      "oi": 257299.36,
+      "funding": 0.00040206,
+      "volume_24h": 726646634.437,
+      "crash_risk": 0,
+      "crash_warnings": [],
+      "social_heat": "低关注",
+      "twitter_followers": 0,
+      "stealth_phase": true,
+      "trending_score": 0,
+      "reddit_subscribers": 0
+    },
+    {
+      "rank": 12,
+      "symbol": "SNDKUSDT",
+      "score": 82.0,
+      "anomalies": [
+        {
+          "type": "oi_acceleration",
+          "score": 90,
+          "detail": "OI加速增长(+16%): OI在近3期增速超过前3期"
+        },
+        {
+          "type": "social_momentum",
+          "score": 85,
+          "detail": "???: 低关注 + ??Trending?? ? ???????"
+        },
+        {
+          "type": "volume_breakout",
+          "score": 45,
+          "detail": "?????(+185%)"
+        }
+      ],
+      "warnings": [],
+      "oi": 20180.4,
+      "funding": 0.0,
+      "volume_24h": 952179806.1298,
+      "crash_risk": 0,
+      "crash_warnings": [],
+      "social_heat": "低关注",
+      "twitter_followers": 0,
+      "stealth_phase": true,
+      "trending_score": 0,
+      "reddit_subscribers": 0
+    },
+    {
+      "rank": 13,
+      "symbol": "DOGEUSDT",
+      "score": 82.0,
+      "anomalies": [
+        {
+          "type": "volatility_compression",
+          "score": 90,
+          "detail": "波动率极度压缩(带宽8.2%, 分位3%)"
+        },
+        {
+          "type": "social_momentum",
+          "score": 85,
+          "detail": "???: 低关注 + ??Trending?? ? ???????"
+        },
+        {
+          "type": "funding_divergence",
+          "score": 60,
+          "detail": "费率微背离: 价格微跌但费率上升(空头犹豫)"
+        }
+      ],
+      "warnings": [],
+      "oi": 2022648747.0,
+      "funding": 5.52e-06,
+      "volume_24h": 408442784.66298,
+      "crash_risk": 0,
+      "crash_warnings": [],
+      "social_heat": "低关注",
+      "twitter_followers": 0,
+      "stealth_phase": true,
+      "trending_score": 0,
+      "reddit_subscribers": 0
+    },
+    {
+      "rank": 14,
+      "symbol": "1000PEPEUSDT",
+      "score": 82.0,
+      "anomalies": [
+        {
+          "type": "volatility_compression",
+          "score": 90,
+          "detail": "波动率极度压缩(带宽8.2%, 分位3%)"
+        },
+        {
+          "type": "social_momentum",
+          "score": 85,
+          "detail": "???: 低关注 + ??Trending?? ? ???????"
+        },
+        {
+          "type": "funding_divergence",
+          "score": 60,
+          "detail": "费率微背离: 价格微跌但费率上升(空头犹豫)"
+        }
+      ],
+      "warnings": [],
+      "oi": 16824784672.0,
+      "funding": -0.00011466,
+      "volume_24h": 189348339.9486099,
+      "crash_risk": 0,
+      "crash_warnings": [],
+      "social_heat": "低关注",
+      "twitter_followers": 0,
+      "stealth_phase": true,
+      "trending_score": 0,
+      "reddit_subscribers": 0
+    },
+    {
+      "rank": 15,
+      "symbol": "FILUSDT",
+      "score": 82.0,
+      "anomalies": [
+        {
+          "type": "volatility_compression",
+          "score": 90,
+          "detail": "波动率极度压缩(带宽9.4%, 分位3%)"
+        },
+        {
+          "type": "social_momentum",
+          "score": 85,
+          "detail": "???: 低关注 + ??Trending?? ? ???????"
+        },
+        {
+          "type": "funding_divergence",
+          "score": 60,
+          "detail": "费率微背离: 价格微跌但费率上升(空头犹豫)"
+        }
+      ],
+      "warnings": [],
+      "oi": 44176518.8,
+      "funding": 1.477e-05,
+      "volume_24h": 96721573.747,
       "crash_risk": 0,
       "crash_warnings": [],
       "social_heat": "低关注",

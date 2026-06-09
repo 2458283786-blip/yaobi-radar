@@ -27,6 +27,7 @@ def generate_report(analysis: dict) -> str:
         "oi_mc_divergence": "OI/MC Divergence",
         "relative_strength": "Relative Strength",
         "social_momentum": "Social Momentum",
+        "volume_breakout": "Volume Breakout",
     }
     for name, a in anomalies.items():
         if a["score"] >= 30:
@@ -80,6 +81,7 @@ def generate_summary(results: list, regime: str) -> str:
             "volatility_compression": "Vol Compr", "funding_divergence": "Fund Div",
             "oi_mc_divergence": "OI Ratio", "relative_strength": "Rel Strength",
             "social_momentum": "Social",
+            "volume_breakout": "Vol Breakout",
         }
         lines.append(f"### {i}. {sym} - Anomaly Score: {score:.1f}")
         for name, a in top_anomalies:
