@@ -1,84 +1,77 @@
-# Latest: 2026-06-10
+# Latest: 2026-06-11
 
 # Daily Market Structure Anomaly Scan
 Market Regime: **Sideways**
 Found 15 candidates with notable structure anomalies
 
-### 1. WLDUSDT - Anomaly Score: 91.5
-  - OI Accel: OI加速增长(+16%): OI在近3期增速超过前3期
-  - Vol Compr: 波动率极度压缩(带宽28.4%, 分位3%)
+### 1. OPNUSDT - Anomaly Score: 85.0
+  - Vol Compr: 波动率极度压缩(带宽34.0%, 分位3%)
+  - Social: ???: 低关注 + ??Trending?? ? ???????
+  - Rel Strength: 相对强度偏强(+10.0% vs BTC)
+
+### 2. HOMEUSDT - Anomaly Score: 83.5
+  - Rel Strength: 相对强度显著(+18.8% vs BTC): 独立走强
+  - Social: ???: 低关注 + ??Trending?? ? ???????
+  - Vol Compr: 波动率偏紧(分位17%)
+
+### 3. DRAMUSDT - Anomaly Score: 82.5
+  - Vol Compr: 波动率极度压缩(带宽12.8%, 分位3%)
   - Social: ???: 低关注 + ??Trending?? ? ???????
 
-### 2. DASHUSDT - Anomaly Score: 91.5
-  - OI Accel: OI加速增长(+16%): OI在近3期增速超过前3期
-  - Vol Compr: 波动率极度压缩(带宽18.7%, 分位3%)
+### 4. INTCUSDT - Anomaly Score: 82.0
+  - Vol Compr: 波动率极度压缩(带宽14.5%, 分位7%)
+  - Social: ???: 低关注 + ??Trending?? ? ???????
+  - Rel Strength: 相对强度偏强(+5.4% vs BTC)
+
+### 5. SNDKUSDT - Anomaly Score: 80.0
+  - Vol Compr: 波动率极度压缩(带宽8.6%, 分位3%)
   - Social: ???: 低关注 + ??Trending?? ? ???????
 
-### 3. OPNUSDT - Anomaly Score: 89.0
-  - Vol Compr: 波动率极度压缩(带宽68.5%, 分位7%)
+### 6. LTCUSDT - Anomaly Score: 79.0
+  - Vol Compr: 波动率极度压缩(带宽4.6%, 分位3%)
   - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Ratio: OI/Vol比快速上升(+33%): 持仓相对成交量在膨胀
+  - OI Accel: OI小幅加速(+5%)
 
-### 4. BLESSUSDT - Anomaly Score: 89.0
-  - OI Accel: OI加速增长(+20%): OI在近3期增速超过前3期
+### 7. BSBUSDT - Anomaly Score: 79.0
   - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Ratio: OI/Vol比快速上升(+37%): 持仓相对成交量在膨胀
+  - OI Accel: OI温和加速(+8%): 资金开始流入
+  - Vol Compr: 波动率偏紧(分位20%)
 
-### 5. PARTIUSDT - Anomaly Score: 89.0
-  - Vol Compr: 波动率极度压缩(带宽14.4%, 分位3%)
-  - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Ratio: OI/Vol比快速上升(+154%): 持仓相对成交量在膨胀
-
-### 6. JTOUSDT - Anomaly Score: 87.5
-  - Fund Div: 费率背离: 价格-3.0%但费率从-0.022%升至0.004%(空头撤退)
-  - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Accel: OI温和加速(+14%): 资金开始流入
-
-### 7. CLOUSDT - Anomaly Score: 86.0
-  - OI Accel: OI加速增长(+21%): OI在近3期增速超过前3期
-  - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Ratio: OI/Vol比快速上升(+52%): 持仓相对成交量在膨胀
-
-### 8. HBARUSDT - Anomaly Score: 86.0
-  - Vol Compr: 波动率极度压缩(带宽5.3%, 分位3%)
-  - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Ratio: OI/Vol比快速上升(+49%): 持仓相对成交量在膨胀
-
-### 9. HEIUSDT - Anomaly Score: 86.0
-  - OI Accel: OI加速增长(+18%): OI在近3期增速超过前3期
-  - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Ratio: OI/Vol比快速上升(+978%): 持仓相对成交量在膨胀
-
-### 10. GIGGLEUSDT - Anomaly Score: 86.0
-  - Vol Compr: 波动率极度压缩(带宽13.1%, 分位3%)
-  - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Ratio: OI/Vol比快速上升(+115%): 持仓相对成交量在膨胀
-
-### 11. 1000SHIBUSDT - Anomaly Score: 85.0
-  - Vol Compr: 波动率极度压缩(带宽5.6%, 分位3%)
-  - Social: ???: 低关注 + ??Trending?? ? ???????
-  - Fund Div: 费率微背离: 价格微跌但费率上升(空头犹豫)
-
-### 12. VELVETUSDT - Anomaly Score: 84.5
-  - OI Accel: OI加速增长(+26%): OI在近3期增速超过前3期
-  - Rel Strength: 相对强度显著(+51.3% vs BTC): 独立走强
+### 8. KATUSDT - Anomaly Score: 77.0
+  - Rel Strength: 相对强度显著(+22.4% vs BTC): 独立走强
   - Social: ???: 低关注 + ??Trending?? ? ???????
 
-### 13. FIDAUSDT - Anomaly Score: 84.5
-  - OI Accel: OI加速增长(+48%): OI在近3期增速超过前3期
-  - Fund Div: 费率背离: 价格-24.3%但费率从-0.334%升至-0.002%(空头撤退)
-  - Social: ???: 低关注 + ??Trending?? ? ???????
-  - [WARNING] Risk: 暴量出货
-
-### 14. PORTALUSDT - Anomaly Score: 84.5
-  - Vol Compr: 波动率极度压缩(带宽25.6%, 分位3%)
-  - Fund Div: 费率背离: 价格-11.1%但费率从-0.074%升至-0.013%(空头撤退)
+### 9. ATOMUSDT - Anomaly Score: 77.0
+  - Vol Compr: 波动率极度压缩(带宽7.8%, 分位7%)
   - Social: ???: 低关注 + ??Trending?? ? ???????
 
-### 15. FILUSDT - Anomaly Score: 84.0
-  - Vol Compr: 波动率极度压缩(带宽8.3%, 分位3%)
+### 10. SOXLUSDT - Anomaly Score: 76.0
   - Social: ???: 低关注 + ??Trending?? ? ???????
-  - OI Accel: OI温和加速(+9%): 资金开始流入
+  - Rel Strength: 相对强度偏强(+6.7% vs BTC)
+  - Vol Compr: 波动率偏紧(分位23%)
+
+### 11. SKHYNIXUSDT - Anomaly Score: 76.0
+  - Vol Compr: 波动率极度压缩(带宽14.3%, 分位3%)
+  - Social: ???: 低关注 + ??Trending?? ? ???????
+
+### 12. CRVUSDT - Anomaly Score: 76.0
+  - Rel Strength: 相对强度显著(+23.7% vs BTC): 独立走强
+  - Social: ???: 低关注 + ??Trending?? ? ???????
+
+### 13. ESPORTSUSDT - Anomaly Score: 76.0
+  - Rel Strength: 相对强度显著(+35.3% vs BTC): 独立走强
+  - Social: ???: 低关注 + ??Trending?? ? ???????
+  - Fund Div: 费率显著上升(+0.145%)
+  - [WARNING] Risk: 高费率陷阱
+
+### 14. FARTCOINUSDT - Anomaly Score: 76.0
+  - Vol Compr: 波动率极度压缩(带宽9.2%, 分位3%)
+  - Social: ???: 低关注 + ??Trending?? ? ???????
+
+### 15. 1000SHIBUSDT - Anomaly Score: 75.5
+  - Social: ???: 低关注 + ??Trending?? ? ???????
+  - Vol Compr: 波动率显著压缩(分位10%)
+  - OI Accel: OI小幅加速(+3%)
 
 ---
 *Records structure anomalies only. Not investment advice.*
